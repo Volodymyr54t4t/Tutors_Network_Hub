@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Новини - ProFix Network Hub</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/news.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <meta name="theme-color" content="#1a2238" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <i class="fas fa-tools"></i>
+          <span>ProFix Network Hub</span>
+        </a>
+        <div class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link active">Головна</a>
+          <a href="message.html" class="nav-link" id="message">Повідомлення</a>
+
+          <a href="chat.html" class="nav-link" id="chat">Чат</a>
+          <a href="news.html" class="nav-link" id="news">Новини</a>
+          <a href="info.html" class="nav-link" id="info"
+            >Повідомлення(майстри)</a
+          >
+          <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+          <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+          <button class="nav-button" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i>Увійти
+          </button>
+          <label class="theme-switch"
+            ><input type="checkbox" id="themeToggle" /><span class="slider">
+              <span class="moon">🌙</span><span class="sun">☀️</span></span
+            ></label
+          >
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="news-hero">
+        <div class="container">
+          <h1>Новини та події</h1>
+          <p>Останні новини та події у світі ремонту та обслуговування</p>
+        </div>
+      </section>
+
+      <section class="news-section">
+        <div class="container">
+          <div class="news-filters">
+            <div class="search-box">
+              <input type="text" id="newsSearch" placeholder="Пошук новин..." />
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="filter-categories">
+              <button class="filter-btn active" data-category="all">Всі</button>
+              <button class="filter-btn" data-category="updates">
+                Оновлення
+              </button>
+              <button class="filter-btn" data-category="events">Події</button>
+              <button class="filter-btn" data-category="tips">Поради</button>
+            </div>
+          </div>
+
+          <!-- Add this to your news.html file if it's not already there -->
+          <div class="news-container" id="newsContainer">
+            <div class="news-loading">
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>Завантаження новин...</p>
+            </div>
+          </div>
+
+          <div class="pagination" id="newsPagination">
+            <!-- Pagination will be dynamically populated -->
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-tools"></i>
+            ProFix Network Hub
+          </div>
+          <p class="footer-description">
+            ProFix Network Hub — ваш надійний партнер у світі професійних
+            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
+            рішення для ваших потреб у різних галузях.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Швидкі посилання</h3>
+          <ul class="footer-links">
+            <li class="footer-link">
+              <a href="index.html">
+                <i class="fas fa-chevron-right"></i> Головна
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#industries">
+                <i class="fas fa-chevron-right"></i> Галузі
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#order">
+                <i class="fas fa-chevron-right"></i> Замовити
+              </a>
+            </li>
+            <li class="footer-link" id="profileFooterLink">
+              <a href="profile.html">
+                <i class="fas fa-chevron-right"></i> Профіль
+              </a>
+            </li>
+            <li class="footer-link" id="news">
+              <a href="news.html">
+                <i class="fas fa-chevron-right"></i> Новини
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="auth.html">
+                <i class="fas fa-chevron-right"></i> Авторизація
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="./admin-login.html">
+                <i class="fas fa-chevron-right"></i> Адмін-панель
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Контакти</h3>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Адреса</div>
+              <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">
+                <a href="tel:+380123456789">+380 96 538 3239</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:info@profixhub.com"
+                  >24g_chvv@liceum.ztu.edu.ua</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Графік роботи</div>
+              <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2025 ProFix Network Hub. Всі права захищені.
+        </p>
+      </div>
+    </footer>
+
+    <!-- News Modal -->
+    <div class="modal-backdrop" id="newsModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title" id="newsModalTitle">Заголовок новини</h3>
+          <button class="modal-close" id="closeNewsModal" aria-label="Закрити">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body" id="newsModalBody">
+          <!-- News content will be dynamically populated -->
+        </div>
+        <div class="modal-footer">
+          <div class="news-stats">
+            <div class="news-views">
+              <i class="fas fa-eye"></i>
+              <span id="newsViewCount">0</span>
+            </div>
+            <div class="news-likes">
+              <button id="newsLikeBtn" class="like-btn" aria-label="Вподобати">
+                <i class="far fa-heart"></i>
+              </button>
+              <span id="newsLikeCount">0</span>
+            </div>
+          </div>
+          <div class="news-share">
+            <button
+              class="share-btn"
+              data-platform="facebook"
+              aria-label="Поділитися у Facebook"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button
+              class="share-btn"
+              data-platform="twitter"
+              aria-label="Поділитися у Twitter"
+            >
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button
+              class="share-btn"
+              data-platform="telegram"
+              aria-label="Поділитися у Telegram"
+            >
+              <i class="fab fa-telegram"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./js/role.js"></script>
+    <script src="js/news.js"></script>
+    <script src="auth.js"></script>
+    <script src="role.js"></script>
+  </body>
+</html>

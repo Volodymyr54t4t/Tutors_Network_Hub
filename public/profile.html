@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мій профіль - ProFix Network Hub</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="./css/profile.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-container">
+          <a href="index.html" class="logo">
+            <i class="fas fa-tools"></i>
+            <span>ProFix Network Hub</span>
+          </a>
+          <div class="nav-menu" id="navMenu">
+            <a href="index.html" class="nav-link active">Головна</a>
+            <a href="message.html" class="nav-link" id="message"
+              >Повідомлення</a
+            >
+
+            <a href="chat.html" class="nav-link" id="chat">Чат</a>
+            <a href="news.html" class="nav-link" id="news">Новини</a>
+            <a href="info.html" class="nav-link" id="info"
+              >Повідомлення(майстри)</a
+            >
+            <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+            <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+            <button class="nav-button" id="loginBtn">
+              <i class="fas fa-sign-in-alt"></i>Увійти
+            </button>
+            <label class="theme-switch"
+              ><input type="checkbox" id="themeToggle" /><span class="slider">
+                <span class="moon">🌙</span><span class="sun">☀️</span></span
+              ></label
+            >
+          </div>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </header>
+      <main>
+        <div class="profile-header">
+          <div class="profile-header-left">
+            <div class="profile-avatar" id="profile-avatar">
+              <span id="avatar-initials"></span>
+              <img
+                id="avatar-image"
+                style="display: none"
+                alt="Profile Avatar"
+              />
+              <div class="profile-avatar-upload" id="avatar-upload">
+                <i class="fas fa-camera"></i> Змінити
+              </div>
+              <input
+                type="file"
+                id="avatar-input"
+                style="display: none"
+                accept="image/*"
+              />
+            </div>
+            <div class="profile-info">
+              <h1 id="profile-name">Завантаження...</h1>
+              <p id="profile-username">@username</p>
+            </div>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-item">
+              <div class="stat-value" id="orders-count">0</div>
+              <div class="stat-label">Замовлень</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="rating-value">0.0</div>
+              <div class="stat-label">Рейтинг</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="reviews-count">0</div>
+              <div class="stat-label">Відгуків</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <div class="tab active" data-tab="profile">Профіль</div>
+          <div class="tab" data-tab="orders">Замовлення</div>
+          <div class="tab" data-tab="reviews">Відгуки</div>
+          <div class="tab" data-tab="settings">Налаштування</div>
+        </div>
+
+        <div id="tab-profile" class="tab-content active">
+          <form id="profile-form" onsubmit="saveProfile(event)">
+            <div class="form-group">
+              <label for="first_name">Ім'я:</label>
+              <input type="text" id="first_name" name="first_name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="last_name">Прізвище:</label>
+              <input type="text" id="last_name" name="last_name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Електронна пошта:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон:</label>
+              <input type="text" id="phone" name="phone" required />
+            </div>
+
+            <div class="form-group">
+              <label for="address">Адреса:</label>
+              <textarea id="address" name="address" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="date_of_birth">Дата народження:</label>
+              <input
+                type="date"
+                id="date_of_birth"
+                name="date_of_birth"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="bio">Про себе:</label>
+              <textarea
+                id="bio"
+                name="bio"
+                rows="4"
+                placeholder="Розкажіть про себе, свій досвід та навички..."
+              ></textarea>
+            </div>
+
+            <div class="form-group master-checkbox-container">
+              <label class="checkbox-wrapper">
+                <input type="checkbox" id="role_master" name="role_master" />
+                <span class="checkmark"></span>
+                Я майстер
+                <span id="approval-status" style="display: none"></span>
+              </label>
+            </div>
+
+            <!-- Services section - initially hidden -->
+            <div id="services">
+              <label>Оберіть галузь:</label>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Інформаційні технології"
+                    data-industry="it"
+                  /><span class="checkmark"></span>Інформаційні
+                  технології</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Медицина"
+                    data-industry="medicine"
+                  /><span class="checkmark"></span>Медицина</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Енергетика"
+                    data-industry="energy"
+                  /><span class="checkmark"></span>Енергетика</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Аграрна галузь"
+                    data-industry="agriculture"
+                  /><span class="checkmark"></span>Аграрна галузь</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Фінанси та банківська справа"
+                    data-industry="finance"
+                  /><span class="checkmark"></span>Фінанси та банківська
+                  справа</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Освіта"
+                    data-industry="education"
+                  /><span class="checkmark"></span>Освіта</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Туризм і гостинність"
+                    data-industry="tourism"
+                  /><span class="checkmark"></span>Туризм і гостинність</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Будівництво та нерухомість"
+                    data-industry="construction"
+                  /><span class="checkmark"></span>Будівництво та
+                  нерухомість</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Транспорт"
+                    data-industry="transport"
+                  /><span class="checkmark"></span>Транспорт</label
+                >
+              </div>
+              <div class="service-option">
+                <label class="checkbox-wrapper"
+                  ><input
+                    type="checkbox"
+                    name="industry"
+                    value="Мистецтво і культура"
+                    data-industry="art"
+                  /><span class="checkmark"></span>Мистецтво і культура</label
+                >
+              </div>
+
+              <!-- Industry-specific skills sections -->
+              <div id="it-skills" class="industry-skills">
+                <h3>Навички в галузі Інформаційних технологій:</h3>
+                <div class="form-group">
+                  <label for="it-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="it-skills-text"
+                    name="it-skills-text"
+                    placeholder="Наприклад: Розробка веб-сайтів, мобільних додатків, налаштування серверів..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Розробка веб-сайтів, мобільних додатків,
+                    налаштування серверів...
+                  </p>
+                </div>
+              </div>
+
+              <div id="medicine-skills" class="industry-skills">
+                <h3>Навички в галузі Медицини:</h3>
+                <div class="form-group">
+                  <label for="medicine-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="medicine-skills-text"
+                    name="medicine-skills-text"
+                    placeholder="Наприклад: Терапія, хірургія, педіатрія..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">Приклад: Терапія, хірургія, педіатрія...</p>
+                </div>
+              </div>
+
+              <div id="energy-skills" class="industry-skills">
+                <h3>Навички в галузі Енергетики:</h3>
+                <div class="form-group">
+                  <label for="energy-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="energy-skills-text"
+                    name="energy-skills-text"
+                    placeholder="Наприклад: Відновлювана енергетика, електроенергетика..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Відновлювана енергетика, електроенергетика...
+                  </p>
+                </div>
+              </div>
+
+              <div id="agriculture-skills" class="industry-skills">
+                <h3>Навички в Аграрній галузі:</h3>
+                <div class="form-group">
+                  <label for="agriculture-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="agriculture-skills-text"
+                    name="agriculture-skills-text"
+                    placeholder="Наприклад: Рослинництво, тваринництво, агрономія..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Рослинництво, тваринництво, агрономія...
+                  </p>
+                </div>
+              </div>
+
+              <div id="finance-skills" class="industry-skills">
+                <h3>Навички в галузі Фінансів та банківської справи:</h3>
+                <div class="form-group">
+                  <label for="finance-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="finance-skills-text"
+                    name="finance-skills-text"
+                    placeholder="Наприклад: Бухгалтерський облік, фінансовий аналіз..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Бухгалтерський облік, фінансовий аналіз...
+                  </p>
+                </div>
+              </div>
+
+              <div id="education-skills" class="industry-skills">
+                <h3>Навички в галузі Освіти:</h3>
+                <div class="form-group">
+                  <label for="education-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="education-skills-text"
+                    name="education-skills-text"
+                    placeholder="Наприклад: Викладання, репетиторство, розробка навчальних програм..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Викладання, репетиторство, розробка навчальних
+                    програм...
+                  </p>
+                </div>
+              </div>
+
+              <div id="tourism-skills" class="industry-skills">
+                <h3>Навички в галузі Туризму і гостинності:</h3>
+                <div class="form-group">
+                  <label for="tourism-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="tourism-skills-text"
+                    name="tourism-skills-text"
+                    placeholder="Наприклад: Організація турів, готельний менеджмент..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Організація турів, готельний менеджмент...
+                  </p>
+                </div>
+              </div>
+
+              <div id="construction-skills" class="industry-skills">
+                <h3>Навички в галузі Будівництва та нерухомості:</h3>
+                <div class="form-group">
+                  <label for="construction-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="construction-skills-text"
+                    name="construction-skills-text"
+                    placeholder="Наприклад: Архітектурне проектування, будівельні роботи..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Архітектурне проектування, будівельні роботи...
+                  </p>
+                </div>
+              </div>
+
+              <div id="transport-skills" class="industry-skills">
+                <h3>Навички в галузі Транспорту:</h3>
+                <div class="form-group">
+                  <label for="transport-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="transport-skills-text"
+                    name="transport-skills-text"
+                    placeholder="Наприклад: Логістика, вантажні перевезення..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Логістика, вантажні перевезення...
+                  </p>
+                </div>
+              </div>
+
+              <div id="art-skills" class="industry-skills">
+                <h3>Навички в галузі Мистецтва і культури:</h3>
+                <div class="form-group">
+                  <label for="art-skills-text"
+                    >Опишіть ваші навички в цій галузі:</label
+                  >
+                  <textarea
+                    id="art-skills-text"
+                    name="art-skills-text"
+                    placeholder="Наприклад: Образотворче мистецтво, музика, театр..."
+                    rows="4"
+                  ></textarea>
+                  <p class="hint">
+                    Приклад: Образотворче мистецтво, музика, театр...
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-group custom-skills">
+                <label for="custom-skills"
+                  >Інші навички (вкажіть самостійно):</label
+                >
+                <textarea
+                  id="custom-skills"
+                  name="custom-skills"
+                  placeholder="Вкажіть інші навички, які у вас є, але не зазначені вище..."
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+
+            <button type="submit">
+              <i class="fas fa-save"></i> Оновити профіль
+            </button>
+          </form>
+        </div>
+
+        <div id="tab-orders" class="tab-content">
+          <div class="loading-container" id="orders-loading">
+            <div class="loading-spinner"></div>
+          </div>
+          <div class="create-order-container">
+            <button id="create-order-btn" class="create-order-btn">
+              <i class="fas fa-plus-circle"></i> Створити замовлення
+            </button>
+          </div>
+          <div class="orders-container" id="orders-container"></div>
+        </div>
+
+        <div id="tab-reviews" class="tab-content">
+          <div class="loading-container" id="reviews-loading">
+            <div class="loading-spinner"></div>
+          </div>
+          <div class="reviews-container" id="reviews-container"></div>
+        </div>
+
+        <div id="tab-settings" class="tab-content">
+          <h3>Змінити пароль</h3>
+          <form id="password-form">
+            <div class="form-group">
+              <label for="current-password">Поточний пароль:</label>
+              <input
+                type="password"
+                id="current-password"
+                name="current-password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="new-password">Новий пароль:</label>
+              <input
+                type="password"
+                id="new-password"
+                name="new-password"
+                required
+              />
+              <div class="password-strength" id="password-strength"></div>
+              <div class="password-requirements">
+                <div class="requirement" id="req-length">
+                  <i class="fas fa-circle"></i> Мінімум 8 символів
+                </div>
+                <div class="requirement" id="req-uppercase">
+                  <i class="fas fa-circle"></i> Мінімум 1 велика літера
+                </div>
+                <div class="requirement" id="req-lowercase">
+                  <i class="fas fa-circle"></i> Мінімум 1 мала літера
+                </div>
+                <div class="requirement" id="req-number">
+                  <i class="fas fa-circle"></i> Мінімум 1 цифра
+                </div>
+                <div class="requirement" id="req-special">
+                  <i class="fas fa-circle"></i> Мінімум 1 спеціальний символ
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password">Підтвердіть новий пароль:</label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                required
+              />
+            </div>
+
+            <button type="submit">
+              <i class="fas fa-key"></i> Змінити пароль
+            </button>
+          </form>
+
+          <h3 style="margin-top: 30px">Налаштування сповіщень</h3>
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                id="email-notifications"
+                name="email-notifications"
+                checked
+              />
+              <span class="checkmark"></span>
+              Отримувати сповіщення на електронну пошту
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                id="order-notifications"
+                name="order-notifications"
+                checked
+              />
+              <span class="checkmark"></span>
+              Сповіщення про нові замовлення
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                id="review-notifications"
+                name="review-notifications"
+                checked
+              />
+              <span class="checkmark"></span>
+              Сповіщення про нові відгуки
+            </label>
+          </div>
+
+          <button type="button" id="save-settings">
+            <i class="fas fa-save"></i> Зберегти налаштування
+          </button>
+        </div>
+
+        <div id="error-message" style="display: none"></div>
+        <div id="success-message" style="display: none"></div>
+        <div id="info-message" style="display: none"></div>
+      </main>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-tools"></i>
+            ProFix Network Hub
+          </div>
+          <p class="footer-description">
+            ProFix Network Hub — ваш надійний партнер у світі професійних
+            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
+            рішення для ваших потреб у різних галузях.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Швидкі посилання</h3>
+          <ul class="footer-links">
+            <li class="footer-link">
+              <a href="index.html">
+                <i class="fas fa-chevron-right"></i> Головна
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#industries">
+                <i class="fas fa-chevron-right"></i> Галузі
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#order">
+                <i class="fas fa-chevron-right"></i> Замовити
+              </a>
+            </li>
+            <li class="footer-link" id="profileFooterLink">
+              <a href="profile.html">
+                <i class="fas fa-chevron-right"></i> Профіль
+              </a>
+            </li>
+            <li class="footer-link" id="news">
+              <a href="news.html">
+                <i class="fas fa-chevron-right"></i> Новини
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="auth.html">
+                <i class="fas fa-chevron-right"></i> Авторизація
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="./admin-login.html">
+                <i class="fas fa-chevron-right"></i> Адмін-панель
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Контакти</h3>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Адреса</div>
+              <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">
+                <a href="tel:+380123456789">+380 96 538 3239</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:info@profixhub.com"
+                  >24g_chvv@liceum.ztu.edu.ua</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Графік роботи</div>
+              <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2025 ProFix Network Hub. Всі права захищені.
+        </p>
+      </div>
+    </footer>
+    <script src="./js/role.js"></script>
+
+    <script src="./js/profile.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="role.js"></script>
+  </body>
+</html>

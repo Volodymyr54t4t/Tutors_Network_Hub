@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Реєстрація та Логін - ProFix Network Hub</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <!-- Meta tags for better mobile experience -->
+    <meta name="theme-color" content="#1a2238" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="stylesheet" href="./css/header.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-container">
+          <a href="index.html" class="logo">
+            <i class="fas fa-tools"></i>
+            <span>ProFix Network Hub</span>
+          </a>
+          <div class="nav-menu" id="navMenu">
+            <a href="index.html" class="nav-link active">Головна</a>
+            <a href="message.html" class="nav-link" id="message"
+              >Повідомлення</a
+            >
+
+            <a href="chat.html" class="nav-link" id="chat">Чат</a>
+            <a href="news.html" class="nav-link" id="news">Новини</a>
+            <a href="info.html" class="nav-link" id="info"
+              >Повідомлення(майстри)</a
+            >
+            <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+            <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+            <button class="nav-button" id="loginBtn">
+              <i class="fas fa-sign-in-alt"></i>Увійти
+            </button>
+            <label class="theme-switch"
+              ><input type="checkbox" id="themeToggle" /><span class="slider">
+                <span class="moon">🌙</span><span class="sun">☀️</span></span
+              ></label
+            >
+          </div>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <div class="auth-container">
+          <h1 class="auth-title">Реєстрація та Логін</h1>
+
+          <form id="registerForm">
+            <h2><i class="fas fa-user-plus"></i> Реєстрація</h2>
+
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                id="regUsername"
+                required
+                placeholder="Ім'я користувача або email"
+              />
+            </div>
+
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="regPassword"
+                required
+                placeholder="Пароль"
+              />
+              <i class="fas fa-eye password-toggle" id="regPasswordToggle"></i>
+            </div>
+
+            <div class="password-requirements">
+              Пароль повинен містити мінімум 8 символів, 1 велику літеру, 1 малу
+              літеру та 1 цифру
+            </div>
+
+            <div class="password-strength">
+              <div
+                class="password-strength-meter"
+                id="passwordStrengthMeter"
+              ></div>
+            </div>
+            <div class="password-strength-text" id="passwordStrengthText"></div>
+
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="regPasswordConfirm"
+                required
+                placeholder="Підтвердіть пароль"
+              />
+              <i
+                class="fas fa-eye password-toggle"
+                id="regPasswordConfirmToggle"
+              ></i>
+            </div>
+
+            <button type="submit">
+              <i class="fas fa-user-plus"></i> ЗАРЕЄСТРУВАТИСЯ
+            </button>
+
+            <div class="form-footer">
+              Вже маєте акаунт? <a href="#" id="showLoginForm">Увійти</a>
+            </div>
+          </form>
+
+          <form id="loginForm">
+            <h2><i class="fas fa-sign-in-alt"></i> Логін</h2>
+
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                id="loginUsername"
+                required
+                placeholder="Ім'я користувача або email"
+              />
+            </div>
+
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="loginPassword"
+                required
+                placeholder="Пароль"
+              />
+              <i
+                class="fas fa-eye password-toggle"
+                id="loginPasswordToggle"
+              ></i>
+            </div>
+
+            <div class="password-requirements">
+              Пароль повинен містити мінімум 8 символів, 1 велику літеру, 1 малу
+              літеру та 1 цифру
+            </div>
+
+            <div class="remember-me">
+              <input type="checkbox" id="rememberMe" />
+              <label for="rememberMe">Запам'ятати мене</label>
+            </div>
+
+            <button type="submit">
+              <i class="fas fa-sign-in-alt"></i> УВІЙТИ
+            </button>
+
+            <div class="form-footer">
+              Немає акаунту?
+              <a href="#" id="showRegisterForm">Зареєструватися</a>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+      </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+      <div id="modalContent" class="modal-content">
+        <div class="modal-header">
+          <span id="modalTitle">Повідомлення</span>
+          <span class="modal-close">&times;</span>
+        </div>
+        <div id="modalBody" class="modal-body">
+          <p id="modalMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <button id="modalOkButton" class="modal-button">OK</button>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-tools"></i>
+            ProFix Network Hub
+          </div>
+          <p class="footer-description">
+            ProFix Network Hub — ваш надійний партнер у світі професійних
+            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
+            рішення для ваших потреб у різних галузях.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Швидкі посилання</h3>
+          <ul class="footer-links">
+            <li class="footer-link">
+              <a href="index.html">
+                <i class="fas fa-chevron-right"></i> Головна
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#industries">
+                <i class="fas fa-chevron-right"></i> Галузі
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#order">
+                <i class="fas fa-chevron-right"></i> Замовити
+              </a>
+            </li>
+            <li class="footer-link" id="profileFooterLink">
+              <a href="profile.html">
+                <i class="fas fa-chevron-right"></i> Профіль
+              </a>
+            </li>
+            <li class="footer-link" id="news">
+              <a href="news.html">
+                <i class="fas fa-chevron-right"></i> Новини
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="auth.html">
+                <i class="fas fa-chevron-right"></i> Авторизація
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="./admin-login.html">
+                <i class="fas fa-chevron-right"></i> Адмін-панель
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Контакти</h3>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Адреса</div>
+              <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">
+                <a href="tel:+380123456789">+380 96 538 3239</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:info@profixhub.com"
+                  >24g_chvv@liceum.ztu.edu.ua</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Графік роботи</div>
+              <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2025 ProFix Network Hub. Всі права захищені.
+        </p>
+      </div>
+    </footer>
+    <script src="./js/role.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="auth.js"></script>
+    <script src="role.js"></script>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Форма повідомлення</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/message.css" />
+    <link rel="stylesheet" href="css/header.css" />
+  </head>
+  <body>
+   <!-- Header -->
+   <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-tools"></i>
+        <span>ProFix Network Hub</span>
+      </a>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link active">Головна</a>
+        <a href="message.html" class="nav-link" id="message">Повідомлення</a>
+
+        <a href="chat.html" class="nav-link" id="chat">Чат</a>
+        <a href="news.html" class="nav-link" id="news">Новини</a>
+        <a href="info.html" class="nav-link" id="info"
+          >Повідомлення(майстри)</a
+        >
+        <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+        <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+        <button class="nav-button" id="loginBtn">
+          <i class="fas fa-sign-in-alt"></i>Увійти
+        </button>
+        <label class="theme-switch"
+          ><input type="checkbox" id="themeToggle" /><span class="slider">
+            <span class="moon">🌙</span><span class="sun">☀️</span></span
+          ></label
+        >
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+    <div class="container">
+      <div class="message-form-container">
+        <h1 class="message-form-title">Надіслати повідомлення</h1>
+
+        <form id="messageForm" class="message-form">
+          <div class="form-group">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder=" "
+              required
+            />
+            <label for="username">Ім'я</label>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder=" "
+              required
+            />
+            <label for="email">Email</label>
+          </div>
+
+          <div class="message-type-selector">
+            <h3>Тип повідомлення</h3>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="messageType" value="text" checked />
+                <i class="fas fa-comment"></i>
+                <span>Текстове повідомлення</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="messageType" value="voice" />
+                <i class="fas fa-microphone"></i>
+                <span>Голосове повідомлення</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="messageType" value="video" />
+                <i class="fas fa-video"></i>
+                <span>Відео повідомлення</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Додавання вибору галузі -->
+          <div class="industry-selector">
+            <h3>Виберіть галузь</h3>
+            <div class="checkbox-grid">
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="industry"
+                  value="Інформаційні технології"
+                />
+                <i class="fas fa-laptop-code"></i>
+                <span>Інформаційні технології</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="industry" value="Медицина" />
+                <i class="fas fa-heartbeat"></i>
+                <span>Медицина</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="industry" value="Енергетика" />
+                <i class="fas fa-bolt"></i>
+                <span>Енергетика</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="industry" value="Аграрна галузь" />
+                <i class="fas fa-tractor"></i>
+                <span>Аграрна галузь</span>
+              </label>
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="industry"
+                  value="Фінанси та банківська справа"
+                />
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Фінанси та банківська справа</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="industry" value="Освіта" />
+                <i class="fas fa-graduation-cap"></i>
+                <span>Освіта</span>
+              </label>
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="industry"
+                  value="Туризм і гостинність"
+                />
+                <i class="fas fa-plane"></i>
+                <span>Туризм і гостинність</span>
+              </label>
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="industry"
+                  value="Будівництво та нерухомість"
+                />
+                <i class="fas fa-hard-hat"></i>
+                <span>Будівництво та нерухомість</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="industry" value="Транспорт" />
+                <i class="fas fa-truck"></i>
+                <span>Транспорт</span>
+              </label>
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="industry"
+                  value="Мистецтво і культура"
+                />
+                <i class="fas fa-palette"></i>
+                <span>Мистецтво і культура</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" id="textMessageGroup">
+            <textarea
+              id="textMessage"
+              name="textMessage"
+              placeholder=" "
+              required
+            ></textarea>
+            <label for="textMessage">Повідомлення</label>
+          </div>
+
+          <div class="form-group hidden" id="voiceMessageGroup">
+            <label class="media-label">Голосове повідомлення</label>
+            <div class="media-controls">
+              <div class="media-buttons">
+                <button type="button" id="startVoiceBtn" class="media-btn">
+                  <i class="fas fa-microphone"></i> Почати запис
+                </button>
+                <button
+                  type="button"
+                  id="stopVoiceBtn"
+                  class="media-btn"
+                  disabled
+                >
+                  <i class="fas fa-stop"></i> Зупинити запис
+                </button>
+              </div>
+              <div class="recording-indicator hidden" id="voiceIndicator">
+                <div class="recording-waves"></div>
+                <span>Запис...</span>
+              </div>
+              <audio id="voicePreview" controls class="hidden"></audio>
+            </div>
+          </div>
+
+          <div class="form-group hidden" id="videoMessageGroup">
+            <label class="media-label">Відео повідомлення</label>
+            <div class="media-controls">
+              <div class="media-buttons">
+                <button type="button" id="startVideoBtn" class="media-btn">
+                  <i class="fas fa-video"></i> Почати запис
+                </button>
+                <button
+                  type="button"
+                  id="stopVideoBtn"
+                  class="media-btn"
+                  disabled
+                >
+                  <i class="fas fa-stop"></i> Зупинити запис
+                </button>
+              </div>
+              <div class="recording-indicator hidden" id="videoIndicator">
+                <div class="recording-waves"></div>
+                <span>Запис...</span>
+              </div>
+              <div id="cameraPreview" class="camera-preview"></div>
+              <video id="videoPreview" controls class="hidden"></video>
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Надіслати повідомлення
+          </button>
+        </form>
+
+        <div id="statusMessage" class="form-message hidden"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-tools"></i>
+            ProFix Network Hub
+          </div>
+          <p class="footer-description">
+            ProFix Network Hub — ваш надійний партнер у світі професійних
+            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
+            рішення для ваших потреб у різних галузях.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Швидкі посилання</h3>
+          <ul class="footer-links">
+            <li class="footer-link">
+              <a href="index.html">
+                <i class="fas fa-chevron-right"></i> Головна
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#industries">
+                <i class="fas fa-chevron-right"></i> Галузі
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#order">
+                <i class="fas fa-chevron-right"></i> Замовити
+              </a>
+            </li>
+            <li class="footer-link" id="profileFooterLink">
+              <a href="profile.html">
+                <i class="fas fa-chevron-right"></i> Профіль
+              </a>
+            </li>
+            <li class="footer-link" id="news">
+              <a href="news.html">
+                <i class="fas fa-chevron-right"></i> Новини
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="auth.html">
+                <i class="fas fa-chevron-right"></i> Авторизація
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="./admin-login.html">
+                <i class="fas fa-chevron-right"></i> Адмін-панель
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Контакти</h3>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Адреса</div>
+              <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">
+                <a href="tel:+380123456789">+380 96 538 3239</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:info@profixhub.com">24g_chvv@liceum.ztu.edu.ua</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Графік роботи</div>
+              <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2025 ProFix Network Hub. Всі права захищені.
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="./js/role.js"></script>
+    <script src="js/message.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/role.js"></script>
+  </body>
+</html>

@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Часті запитання | ProFix Network Hub</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/faq.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">
+          <i class="fas fa-tools"></i>
+          <span>ProFix Network Hub</span>
+        </a>
+        <div class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link">Головна</a>
+          <a href="message.html" class="nav-link" id="message">Повідомлення</a>
+          <a href="chat.html" class="nav-link" id="chat">Чат</a>
+          <a href="news.html" class="nav-link" id="news">Новини</a>
+          <a href="info.html" class="nav-link" id="info"
+            >Повідомлення(майстри)</a
+          >
+          <a href="order.html" class="nav-link" id="orderLink">Замовлення</a>
+          <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+          <a href="faq.html" class="nav-link active">FAQ</a>
+          <button class="nav-button" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i> Увійти
+          </button>
+          <div class="theme-switch">
+            <i class="fas fa-moon"></i>
+            <label class="switch">
+              <input type="checkbox" id="theme-toggle" />
+              <span class="slider round"></span>
+            </label>
+            <i class="fas fa-sun"></i>
+          </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="faq-container">
+          <h1 class="faq-title">Часті запитання</h1>
+
+          <div class="faq-toc">
+            <h3 class="faq-toc-title">Зміст</h3>
+            <ul class="faq-toc-list">
+              <li>
+                <a href="#general"
+                  ><i class="fas fa-angle-right"></i> Загальна інформація</a
+                >
+              </li>
+              <li>
+                <a href="#registration"
+                  ><i class="fas fa-angle-right"></i> Реєстрація та обліковий
+                  запис</a
+                >
+              </li>
+              <li>
+                <a href="#clients"
+                  ><i class="fas fa-angle-right"></i> Для замовників</a
+                >
+              </li>
+              <li>
+                <a href="#specialists"
+                  ><i class="fas fa-angle-right"></i> Для фахівців</a
+                >
+              </li>
+              <li>
+                <a href="#communication"
+                  ><i class="fas fa-angle-right"></i> Комунікація на
+                  платформі</a
+                >
+              </li>
+              <li>
+                <a href="#security"
+                  ><i class="fas fa-angle-right"></i> Безпека та
+                  конфіденційність</a
+                >
+              </li>
+              <li>
+                <a href="#technical"
+                  ><i class="fas fa-angle-right"></i> Технічна підтримка</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div id="general" class="faq-section">
+            <h2 class="faq-section-title">Загальна інформація</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Що таке ProFix Network Hub?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  ProFix Network Hub — це онлайн-платформа для комунікації між
+                  замовниками та фахівцями. Наша мета — забезпечити зручний та
+                  швидкий доступ до професійної допомоги у різних галузях, таких
+                  як інформаційні технології, медицина, освіта, будівництво та
+                  інші.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Хто розробив цю платформу?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Платформа розроблена Володимиром Чижевським, учнем 10 класу
+                  Відокремленого підрозділу "Науковий ліцей" Державного
+                  університету "Житомирська політехніка", під керівництвом
+                  Віталія Шатківського та Дениса Фуріхати в рамках проекту
+                  Житомирського територіального відділення Малої академії наук
+                  України.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Які галузі представлені на платформі?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>На платформі представлені наступні галузі:</p>
+                <ul>
+                  <li>Інформаційні технології</li>
+                  <li>Медицина</li>
+                  <li>Енергетика</li>
+                  <li>Аграрна галузь</li>
+                  <li>Фінанси та банківська справа</li>
+                  <li>Освіта</li>
+                  <li>Туризм і гостинність</li>
+                  <li>Будівництво та нерухомість</li>
+                  <li>Транспорт</li>
+                  <li>Мистецтво і культура</li>
+                </ul>
+                <p>
+                  Також є можливість додавати інші навички, які не входять до
+                  цього списку.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Чи платне користування платформою?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Реєстрація та базове користування платформою є безкоштовним.
+                  Оплата може стягуватися за конкретні послуги, які надають
+                  фахівці, згідно з їхніми тарифами.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id="registration" class="faq-section">
+            <h2 class="faq-section-title">Реєстрація та обліковий запис</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як зареєструватися на платформі?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Для реєстрації на платформі:</p>
+                <ol>
+                  <li>Перейдіть на сторінку "Реєстрація/Авторизація"</li>
+                  <li>
+                    Введіть свою електронну пошту та створіть надійний пароль
+                  </li>
+                  <li>Натисніть кнопку "Зареєструватися"</li>
+                  <li>
+                    Після реєстрації ви будете перенаправлені на сторінку
+                    профілю, де зможете заповнити додаткову інформацію про себе
+                  </li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Яку інформацію потрібно вказати в профілі?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>У профілі рекомендується вказати:</p>
+                <ul>
+                  <li>Ім'я та прізвище</li>
+                  <li>Контактний телефон</li>
+                  <li>Адресу</li>
+                  <li>Дату народження</li>
+                </ul>
+                <p>
+                  Якщо ви бажаєте стати фахівцем, вам також потрібно буде
+                  вказати галузі, в яких ви працюєте, та ваші навички.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як змінити пароль або оновити особисту інформацію?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Для зміни пароля або оновлення особистої інформації:</p>
+                <ol>
+                  <li>Увійдіть у свій обліковий запис</li>
+                  <li>Перейдіть на сторінку "Профіль"</li>
+                  <li>Внесіть необхідні зміни у відповідні поля</li>
+                  <li>Зміни зберігаються автоматично</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Що робити, якщо я забув пароль?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Якщо ви забули пароль:</p>
+                <ol>
+                  <li>Перейдіть на сторінку "Реєстрація/Авторизація"</li>
+                  <li>Натисніть на посилання "Забули пароль?"</li>
+                  <li>
+                    Введіть електронну пошту, яку ви використовували при
+                    реєстрації
+                  </li>
+                  <li>
+                    Перевірте вашу електронну пошту для отримання інструкцій
+                    щодо відновлення пароля
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div id="clients" class="faq-section">
+            <h2 class="faq-section-title">Для замовників</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як створити заявку на послугу?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Для створення заявки на послугу:</p>
+                <ol>
+                  <li>
+                    На головній сторінці знайдіть форму "Залишити заявку про
+                    допомогу"
+                  </li>
+                  <li>Вкажіть тему заявки</li>
+                  <li>Опишіть вашу проблему детально</li>
+                  <li>Вкажіть контактний номер телефону</li>
+                  <li>Натисніть кнопку "Відправити заявку"</li>
+                </ol>
+                <p>
+                  Після відправлення заявка буде відображена в адмін-панелі, де
+                  її оброблять та призначать відповідного фахівця.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як дізнатися статус моєї заявки?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Щоб дізнатися статус вашої заявки:</p>
+                <ol>
+                  <li>Увійдіть у свій обліковий запис</li>
+                  <li>Перейдіть у розділ "Мої заявки" у вашому профілі</li>
+                  <li>
+                    Тут ви побачите всі ваші заявки та їхні поточні статуси: "На
+                    розгляді", "Прийнято", "Відхилено" або "Завершено"
+                  </li>
+                </ol>
+                <p>
+                  Також ви отримаєте повідомлення на електронну пошту при зміні
+                  статусу вашої заявки.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як зв'язатися з призначеним фахівцем?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Після того, як вашу заявку буде прийнято та призначено
+                  фахівця, ви зможете зв'язатися з ним через:
+                </p>
+                <ul>
+                  <li>Текстові повідомлення в чаті платформи</li>
+                  <li>Голосові повідомлення</li>
+                  <li>Онлайн-чат у реальному часі</li>
+                  <li>Відеоконференцію</li>
+                </ul>
+                <p>
+                  Усі ці опції доступні в розділі "Мої заявки" при натисканні на
+                  конкретну заявку.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Чи можу я скасувати або змінити свою заявку?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Так, ви можете скасувати або змінити свою заявку, якщо вона ще
+                  має статус "На розгляді":
+                </p>
+                <ol>
+                  <li>Перейдіть у розділ "Мої заявки" у вашому профілі</li>
+                  <li>Знайдіть потрібну заявку</li>
+                  <li>
+                    Натисніть кнопку "Редагувати" для внесення змін або
+                    "Скасувати" для видалення заявки
+                  </li>
+                </ol>
+                <p>
+                  Якщо заявка вже прийнята і фахівець почав роботу, вам потрібно
+                  зв'язатися з ним безпосередньо для обговорення змін.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id="specialists" class="faq-section">
+            <h2 class="faq-section-title">Для фахівців</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як стати фахівцем на платформі?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Щоб стати фахівцем на платформі:</p>
+                <ol>
+                  <li>Зареєструйтеся або увійдіть у свій обліковий запис</li>
+                  <li>Перейдіть на сторінку "Профіль"</li>
+                  <li>Поставте відмітку "Я хочу стати майстром"</li>
+                  <li>Виберіть галузі, в яких ви працюєте</li>
+                  <li>Вкажіть ваші навички та досвід</li>
+                  <li>Заповніть всю необхідну інформацію</li>
+                  <li>
+                    Ваша заявка буде розглянута адміністраторами платформи
+                  </li>
+                </ol>
+                <p>
+                  Після схвалення вашої заявки ви отримаєте повідомлення на
+                  електронну пошту та зможете почати приймати замовлення.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як додати нові послуги в мій профіль?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Для додавання нових послуг у ваш профіль:</p>
+                <ol>
+                  <li>Увійдіть у свій обліковий запис</li>
+                  <li>Перейдіть на сторінку "Профіль"</li>
+                  <li>
+                    У розділі "Мої послуги" натисніть кнопку "Додати нову
+                    послугу"
+                  </li>
+                  <li>Виберіть категорію послуги</li>
+                  <li>Опишіть послугу, вкажіть ваш досвід та навички</li>
+                  <li>Натисніть "Зберегти"</li>
+                </ol>
+                <p>
+                  Нова послуга буде відправлена на модерацію адміністраторам.
+                  Після схвалення вона з'явиться у вашому профілі та стане
+                  доступною для замовників.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як я дізнаюся про нові заявки?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Про нові заявки ви будете повідомлені через:</p>
+                <ul>
+                  <li>Електронну пошту</li>
+                  <li>Повідомлення на платформі</li>
+                  <li>Розділ "Нові заявки" у вашому профілі</li>
+                </ul>
+                <p>
+                  Ви можете налаштувати спосіб отримання повідомлень у розділі
+                  "Налаштування" вашого профілю.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як приймати або відхиляти заявки?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Для прийняття або відхилення заявки:</p>
+                <ol>
+                  <li>Увійдіть у свій обліковий запис</li>
+                  <li>Перейдіть у розділ "Нові заявки" у вашому профілі</li>
+                  <li>Перегляньте деталі заявки</li>
+                  <li>Натисніть кнопку "Прийняти" або "Відхилити"</li>
+                  <li>
+                    При прийнятті заявки ви можете залишити коментар для
+                    замовника
+                  </li>
+                </ol>
+                <p>
+                  Після прийняття заявки ви зможете зв'язатися з замовником
+                  через систему комунікації платформи.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id="communication" class="faq-section">
+            <h2 class="faq-section-title">Комунікація на платформі</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Які способи комунікації доступні на платформі?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>На платформі доступні наступні способи комунікації:</p>
+                <ul>
+                  <li>
+                    <strong>Текстові повідомлення</strong> - для коротких
+                    пояснень та запитань
+                  </li>
+                  <li>
+                    <strong>Голосові повідомлення</strong> - коли немає часу
+                    друкувати
+                  </li>
+                  <li>
+                    <strong>Онлайн-чат</strong> - для миттєвого обговорення
+                  </li>
+                  <li>
+                    <strong>Відеоконференція</strong> - для детального показу
+                    проблеми або пояснення
+                  </li>
+                </ul>
+                <p>
+                  Ви можете вибрати найзручніший спосіб комунікації залежно від
+                  ситуації.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як розпочати відеоконференцію?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Для початку відеоконференції:</p>
+                <ol>
+                  <li>
+                    Відкрийте заявку, за якою ви хочете провести
+                    відеоконференцію
+                  </li>
+                  <li>
+                    У меню засобів комунікації виберіть іконку
+                    "Відеоконференція"
+                  </li>
+                  <li>Дочекайтеся підключення іншої сторони</li>
+                  <li>
+                    Надайте дозвіл на використання камери та мікрофона у вашому
+                    браузері
+                  </li>
+                </ol>
+                <p>
+                  Для якісного відеозв'язку рекомендується використовувати
+                  стабільне інтернет-з'єднання.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Чи зберігається історія спілкування?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Так, історія текстових та голосових повідомлень зберігається в
+                  системі для зручності користувачів. Ви можете переглянути
+                  історію спілкування за кожною заявкою у відповідному розділі.
+                </p>
+                <p>
+                  Відеоконференції не записуються автоматично, але ви можете
+                  зробити запис за взаємною згодою сторін.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Чи можна надсилати файли через платформу?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Так, платформа підтримує обмін файлами. Ви можете надсилати:
+                </p>
+                <ul>
+                  <li>Зображення (JPG, PNG, GIF)</li>
+                  <li>Документи (PDF, DOC, DOCX)</li>
+                  <li>Архіви (ZIP, RAR)</li>
+                  <li>Інші типи файлів розміром до 20 МБ</li>
+                </ul>
+                <p>
+                  Для надсилання файлу використовуйте кнопку "Прикріпити файл" у
+                  вікні повідомлень.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id="security" class="faq-section">
+            <h2 class="faq-section-title">Безпека та конфіденційність</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як захищені мої персональні дані?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Ми серйозно ставимося до захисту ваших персональних даних:
+                </p>
+                <ul>
+                  <li>
+                    Всі паролі зберігаються в зашифрованому вигляді з
+                    використанням бібліотеки bcrypt
+                  </li>
+                  <li>
+                    Передача даних здійснюється через захищене з'єднання HTTPS
+                  </li>
+                  <li>
+                    Доступ до бази даних мають лише авторизовані адміністратори
+                  </li>
+                  <li>Регулярно проводиться аудит безпеки системи</li>
+                </ul>
+                <p>
+                  Детальніше про обробку персональних даних ви можете дізнатися
+                  в нашій
+                  <a href="privacy-policy.html">Політиці конфіденційності</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Хто має доступ до моїх контактних даних?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Доступ до ваших контактних даних мають:</p>
+                <ul>
+                  <li>Адміністратори платформи (для технічної підтримки)</li>
+                  <li>
+                    Фахівці, яким призначена ваша заявка (лише після прийняття
+                    заявки)
+                  </li>
+                </ul>
+                <p>
+                  Ми не передаємо ваші контактні дані третім особам без вашої
+                  згоди.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Чи використовуєте ви файли cookie?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Так, ми використовуємо файли cookie для покращення роботи
+                  платформи та забезпечення зручності користування. Файли cookie
+                  допомагають нам:
+                </p>
+                <ul>
+                  <li>Зберігати інформацію про вашу сесію</li>
+                  <li>Запам'ятовувати ваші налаштування та вподобання</li>
+                  <li>
+                    Аналізувати використання платформи для її вдосконалення
+                  </li>
+                </ul>
+                <p>
+                  Ви можете керувати налаштуваннями файлів cookie у вашому
+                  браузері. Детальніше про використання файлів cookie ви можете
+                  дізнатися в нашій
+                  <a href="privacy-policy.html">Політиці конфіденційності</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як повідомити про порушення безпеки?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Якщо ви виявили порушення безпеки або підозрюєте
+                  несанкціонований доступ до вашого облікового запису:
+                </p>
+                <ol>
+                  <li>Негайно змініть пароль</li>
+                  <li>
+                    Зв'яжіться з нашою службою підтримки через форму зворотного
+                    зв'язку
+                  </li>
+                  <li>Опишіть проблему максимально детально</li>
+                  <li>Вкажіть час, коли ви помітили підозрілу активність</li>
+                </ol>
+                <p>
+                  Ми оперативно розглянемо ваше повідомлення та вживемо
+                  необхідних заходів для захисту вашого облікового запису.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id="technical" class="faq-section">
+            <h2 class="faq-section-title">Технічна підтримка</h2>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як зв'язатися з технічною підтримкою?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Зв'язатися з технічною підтримкою можна наступними способами:
+                </p>
+                <ul>
+                  <li>Через форму зворотного зв'язку на сайті</li>
+                  <li>Електронною поштою: volodymyr24082009@gmail.com</li>
+                  <li>
+                    За телефоном: +380 12 345 6789 (в робочі дні з 9:00 до
+                    18:00)
+                  </li>
+                </ul>
+                <p>
+                  Ми намагаємося відповідати на всі запити протягом 24 годин.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Які браузери підтримує платформа?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Наша платформа підтримує всі сучасні браузери, включаючи:</p>
+                <ul>
+                  <li>Google Chrome (рекомендовано)</li>
+                  <li>Mozilla Firefox</li>
+                  <li>Safari</li>
+                  <li>Microsoft Edge</li>
+                  <li>Opera</li>
+                </ul>
+                <p>
+                  Для найкращої роботи рекомендуємо використовувати останні
+                  версії браузерів.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Чи є мобільний додаток?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Наша платформа реалізована як PWA (Progressive Web App), що
+                  дозволяє використовувати її як звичайний мобільний додаток без
+                  необхідності завантаження з магазинів додатків.
+                </p>
+                <p>Щоб додати платформу на головний екран вашого пристрою:</p>
+                <ol>
+                  <li>Відкрийте сайт у браузері</li>
+                  <li>
+                    На iOS: натисніть кнопку "Поділитися" та виберіть "На
+                    головний екран"
+                  </li>
+                  <li>
+                    На Android: натисніть на три крапки в меню браузера та
+                    виберіть "Додати на головний екран"
+                  </li>
+                </ol>
+                <p>
+                  Після цього ви зможете користуватися платформою як звичайним
+                  додатком, навіть при повільному інтернет-з'єднанні.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h3>Як повідомити про помилку на сайті?</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Якщо ви виявили помилку на сайті:</p>
+                <ol>
+                  <li>Зробіть скріншот сторінки з помилкою</li>
+                  <li>Опишіть, які дії призвели до помилки</li>
+                  <li>Вкажіть, який браузер та пристрій ви використовуєте</li>
+                  <li>
+                    Надішліть цю інформацію через форму зворотного зв'язку або
+                    на електронну пошту технічної підтримки
+                  </li>
+                </ol>
+                <p>
+                  Ми цінуємо ваші повідомлення про помилки, оскільки вони
+                  допомагають нам покращувати платформу.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-contact">
+            <h3 class="faq-contact-title">
+              Не знайшли відповідь на своє запитання?
+            </h3>
+            <p>Зв'яжіться з нами:</p>
+            <div class="faq-contact-info">
+              <i class="fas fa-user"></i>
+              <span>Володимир Чижевський</span>
+            </div>
+            <div class="faq-contact-info">
+              <i class="fas fa-envelope"></i>
+              <span>volodymyr24082009@gmail.com</span>
+            </div>
+            <div class="faq-contact-info">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Житомирська політехніка, м. Житомир, Україна</span>
+            </div>
+          </div>
+
+          <p class="faq-date">Останнє оновлення: 4 травня 2025 року</p>
+
+          <!-- Print Button -->
+          <button class="print-button" onclick="printFAQ()">
+            <i class="fas fa-print"></i> Роздрукувати
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-tools"></i>
+            ProFix Network Hub
+          </div>
+          <p class="footer-description">
+            ProFix Network Hub — ваш надійний партнер у світі професійних
+            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
+            рішення для ваших потреб у різних галузях.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Швидкі посилання</h3>
+          <ul class="footer-links">
+            <li class="footer-link">
+              <a href="index.html">
+                <i class="fas fa-chevron-right"></i> Головна
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#industries">
+                <i class="fas fa-chevron-right"></i> Галузі
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="#order">
+                <i class="fas fa-chevron-right"></i> Замовити
+              </a>
+            </li>
+            <li class="footer-link" id="profileFooterLink">
+              <a href="faq.html">
+                <i class="fas fa-chevron-right"></i> Часті запитання
+              </a>
+            </li>
+            <li class="footer-link" id="news">
+              <a href="terms-of-use.html">
+                <i class="fas fa-chevron-right"></i> Умови використання
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="privacy-policy.html">
+                <i class="fas fa-chevron-right"></i> Політика конфіденційності
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="./about.html">
+                <i class="fas fa-chevron-right"></i> Про нас
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Контакти</h3>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Адреса</div>
+              <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">
+                <a href="tel:+380123456789">+380 96 538 3239</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:info@profixhub.com"
+                  >24g_chvv@liceum.ztu.edu.ua</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Графік роботи</div>
+              <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2025 ProFix Network Hub. Всі права захищені.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top-faq" id="backToTopBtn">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="./js/role.js"></script>
+    <script src="js/faq.js"></script>
+  </body>
+</html>

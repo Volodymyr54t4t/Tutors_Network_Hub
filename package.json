@@ -1,0 +1,53 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "fs": "^0.0.1-security",
+    "google-auth-library": "^9.15.1",
+    "helmet": "^8.1.0",
+    "http": "^0.0.1-security",
+    "io": "^1.5.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.11.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.1",
+    "path": "^0.12.7",
+    "pg": "^8.14.1",
+    "pool": "^0.4.1",
+    "punycode": "^2.3.1",
+    "sharp": "^0.33.5",
+    "socket.io": "^4.8.1",
+    "telegraf": "^4.16.3",
+    "uuid": "^11.1.0",
+    "validator": "^13.12.0",
+    "xss-clean": "^0.1.4"
+  },
+  "name": "autolikar",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "npm rebuild bcrypt",
+    "postinstall": "npm rebuild bcrypt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volodymyr24082009/AutoLikar24-7.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/volodymyr24082009/AutoLikar24-7/issues"
+  },
+  "homepage": "https://github.com/volodymyr24082009/AutoLikar24-7#readme",
+  "description": ""
+}

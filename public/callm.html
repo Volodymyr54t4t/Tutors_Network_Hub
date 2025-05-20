@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відеодзвінки - Сторона майстра</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/callm.css"><link rel="stylesheet" href="./css/header.css" />
+</head>
+<body>
+   <!-- Header -->
+   <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-tools"></i>
+        <span>ProFix Network Hub</span>
+      </a>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link active">Головна</a>
+        <a href="message.html" class="nav-link" id="message">Повідомлення</a>
+
+        <a href="chat.html" class="nav-link" id="chat">Чат</a>
+        <a href="news.html" class="nav-link" id="news">Новини</a>
+        <a href="info.html" class="nav-link" id="info"
+          >Повідомлення(майстри)</a
+        >
+        <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+        <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+        <button class="nav-button" id="loginBtn">
+          <i class="fas fa-sign-in-alt"></i>Увійти
+        </button>
+        <label class="theme-switch"
+          ><input type="checkbox" id="themeToggle" /><span class="slider">
+            <span class="moon">🌙</span><span class="sun">☀️</span></span
+          ></label
+        >
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+        <div class="main-content">
+            <div class="tab-content active" id="clients-tab">
+                <div class="header">
+                    <h2>Клієнти онлайн</h2>
+                    <div class="search-container">
+                        <input type="text" id="search-clients" placeholder="Пошук клієнтів...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-container">
+                        <select id="status-filter">
+                            <option value="all">Всі статуси</option>
+                            <option value="online">Онлайн</option>
+                            <option value="offline">Офлайн</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="clients-list" id="clients-list">
+                    <!-- Список клієнтів буде додано через JavaScript -->
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Завантаження клієнтів...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="history-tab">
+                <div class="header">
+                    <h2>Історія дзвінків</h2>
+                    <div class="filter-container">
+                        <select id="history-filter">
+                            <option value="all">Всі дзвінки</option>
+                            <option value="completed">Завершені</option>
+                            <option value="missed">Пропущені</option>
+                            <option value="rejected">Відхилені</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="call-history" id="call-history">
+                    <!-- Історія дзвінків буде додана через JavaScript -->
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Завантаження історії...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="stats-tab">
+                <div class="header">
+                    <h2>Статистика дзвінків</h2>
+                </div>
+                <div class="stats-container">
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Всього дзвінків</h3>
+                                <p id="total-calls">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Прийнято</h3>
+                                <p id="accepted-calls">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Пропущено</h3>
+                                <p id="missed-calls">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Середня тривалість</h3>
+                                <p id="avg-duration">0:00</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Дзвінків сьогодні</h3>
+                                <p id="today-calls">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Відсоток прийнятих</h3>
+                                <p id="acceptance-rate">0%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Активність за тиждень</h3>
+                        <canvas id="weekly-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="settings-tab">
+                <div class="header">
+                    <h2>Налаштування</h2>
+                </div>
+                <div class="settings-container">
+                    <div class="settings-group">
+                        <h3>Налаштування аудіо та відео</h3>
+                        <div class="setting-item">
+                            <label for="audio-input">Мікрофон:</label>
+                            <select id="audio-input">
+                                <!-- Буде додано через JavaScript -->
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="video-input">Камера:</label>
+                            <select id="video-input">
+                                <!-- Буде додано через JavaScript -->
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="audio-output">Динаміки:</label>
+                            <select id="audio-output">
+                                <!-- Буде додано через JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-group">
+                        <h3>Тестування пристроїв</h3>
+                        <div class="device-test">
+                            <button id="test-audio" class="test-button">
+                                <i class="fas fa-microphone"></i>
+                                Перевірити мікрофон
+                            </button>
+                            <div id="audio-level" class="level-meter">
+                                <div class="level-bar"></div>
+                            </div>
+                        </div>
+                        <div class="device-test">
+                            <button id="test-video" class="test-button">
+                                <i class="fas fa-video"></i>
+                                Перевірити камеру
+                            </button>
+                            <div id="video-preview-container" class="video-preview">
+                                <video id="video-preview" autoplay muted></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-group">
+                        <h3>Налаштування статусу</h3>
+                        <div class="setting-item">
+                            <label for="availability-status">Доступність:</label>
+                            <select id="availability-status">
+                                <option value="available">Доступний</option>
+                                <option value="busy">Зайнятий</option>
+                                <option value="away">Відійшов</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="auto-answer">Автовідповідь:</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="auto-answer">
+                                <label for="auto-answer"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальне вікно для дзвінка -->
+    <div class="call-modal" id="call-modal">
+        <div class="call-container">
+            <div class="call-header">
+                <h3 id="call-status">З'єднання...</h3>
+                <span id="call-timer">00:00</span>
+            </div>
+            <div class="video-container">
+                <div class="remote-video-container">
+                    <video id="remote-video" autoplay></video>
+                    <div class="remote-info">
+                        <h4 id="remote-name">Клієнт</h4>
+                    </div>
+                </div>
+                <div class="local-video-container">
+                    <video id="local-video" autoplay muted></video>
+                </div>
+            </div>
+            <div class="call-controls">
+                <button id="toggle-mic" class="control-button">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="toggle-video" class="control-button">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button id="end-call" class="control-button end-call">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+                <button id="toggle-fullscreen" class="control-button">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальне вікно для вхідного дзвінка -->
+    <div class="incoming-call-modal" id="incoming-call-modal">
+        <div class="incoming-call-container">
+            <div class="caller-info">
+                <div class="caller-avatar">
+                    <img id="caller-avatar" src="/placeholder.svg?height=80&width=80" alt="Аватар">
+                </div>
+                <h3 id="caller-name">Ім'я клієнта</h3>
+                <p>Вхідний дзвінок</p>
+            </div>
+            <div class="incoming-call-controls">
+                <button id="accept-call" class="call-button accept">
+                    <i class="fas fa-phone"></i>
+                    Прийняти
+                </button>
+                <button id="decline-call" class="call-button decline">
+                    <i class="fas fa-phone-slash"></i>
+                    Відхилити
+                </button>
+            </div>
+        </div>
+    </div>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <i class="fas fa-tools"></i>
+          ProFix Network Hub
+        </div>
+        <p class="footer-description">
+          ProFix Network Hub — ваш надійний партнер у світі професійних
+          послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
+          рішення для ваших потреб у різних галузях.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Швидкі посилання</h3>
+        <ul class="footer-links">
+          <li class="footer-link">
+            <a href="index.html">
+              <i class="fas fa-chevron-right"></i> Головна
+            </a>
+          </li>
+          <li class="footer-link">
+            <a href="#industries">
+              <i class="fas fa-chevron-right"></i> Галузі
+            </a>
+          </li>
+          <li class="footer-link">
+            <a href="#order">
+              <i class="fas fa-chevron-right"></i> Замовити
+            </a>
+          </li>
+          <li class="footer-link" id="profileFooterLink">
+            <a href="profile.html">
+              <i class="fas fa-chevron-right"></i> Профіль
+            </a>
+          </li>
+          <li class="footer-link" id="news">
+            <a href="news.html">
+              <i class="fas fa-chevron-right"></i> Новини
+            </a>
+          </li>
+          <li class="footer-link">
+            <a href="auth.html">
+              <i class="fas fa-chevron-right"></i> Авторизація
+            </a>
+          </li>
+          <li class="footer-link">
+            <a href="./admin-login.html">
+              <i class="fas fa-chevron-right"></i> Адмін-панель
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Контакти</h3>
+        <div class="footer-contact">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-info">
+            <div class="contact-label">Адреса</div>
+            <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <div class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-info">
+            <div class="contact-label">Телефон</div>
+            <div class="contact-value">
+              <a href="tel:+380123456789">+380 96 538 3239</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-info">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:info@profixhub.com">24g_chvv@liceum.ztu.edu.ua</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <div class="contact-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="contact-info">
+            <div class="contact-label">Графік роботи</div>
+            <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; 2025 ProFix Network Hub. Всі права захищені.
+      </p>
+    </div>
+  </footer>
+
+    <!-- Звуки -->
+    <audio id="ringtone" loop>
+        <source src="/sounds/ringtone.mp3" type="audio/mp3">
+    </audio>
+    <audio id="call-end-sound">
+        <source src="/sounds/call-end.mp3" type="audio/mp3">
+    </audio>
+    <script src="./js/role.js"></script>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/callm.js"></script>
+</body>
+</html>

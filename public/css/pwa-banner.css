@@ -1,0 +1,140 @@
+/* PWA Install Banner Styles */
+.pwa-install-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--gradient-dark);
+  padding: 15px 20px;
+  display: none; /* Initially hidden */
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-top: 1px solid var(--border-dark);
+  transform: translateY(100%);
+  transition: transform 0.5s ease-out;
+}
+
+html.light .pwa-install-banner {
+  background: var(--gradient-light);
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--border-light);
+}
+
+.pwa-install-banner.active {
+  transform: translateY(0);
+}
+
+.install-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.install-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.install-text h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: var(--text-dark);
+}
+
+html.light .install-text h3 {
+  color: var(--text-light);
+}
+
+.install-text p {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  opacity: 0.8;
+}
+
+html.light .install-text p {
+  color: var(--text-light);
+}
+
+.install-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.install-btn {
+  padding: 10px 20px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-medium);
+}
+
+.install-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.close-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-medium);
+}
+
+html.light .close-btn {
+  color: var(--text-light);
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+@media (max-width: 768px) {
+  .pwa-install-banner {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .install-content {
+    width: 100%;
+  }
+
+  .install-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .install-btn {
+    flex: 1;
+  }
+}
