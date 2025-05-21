@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ProFix Network Hub - Перегляд заявок</title>
+    <title>Tutor Network Hub - Перегляд заявок на заняття</title>
     <meta
       name="description"
-      content="ProFix Network Hub - платформа, що з'єднує клієнтів з професійними майстрами для різних галузей"
+      content="Tutor Network Hub - платформа, що з'єднує учнів з професійними репетиторами з різних предметів"
     />
     <link
       rel="stylesheet"
@@ -22,23 +22,22 @@
     <link rel="stylesheet" href="./css/order.css" />
   </head>
   <body>
-     <!-- Header -->
+    <!-- Header -->
     <header class="header">
       <div class="header-container">
         <a href="index.html" class="logo">
-          <i class="fas fa-tools"></i>
-          <span>ProFix Network Hub</span>
+          <i class="fas fa-graduation-cap"></i>
+          <span>Tutor Network Hub</span>
         </a>
         <div class="nav-menu" id="navMenu">
-          <a href="index.html" class="nav-link active">Головна</a>
+          <a href="index.html" class="nav-link">Головна</a>
           <a href="message.html" class="nav-link" id="message">Повідомлення</a>
-
           <a href="chat.html" class="nav-link" id="chat">Чат</a>
           <a href="news.html" class="nav-link" id="news">Новини</a>
           <a href="info.html" class="nav-link" id="info"
-            >Повідомлення(майстри)</a
+            >Повідомлення(репетитори)</a
           >
-          <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+          <a href="order.html" class="nav-link active" id="orders">Заняття</a>
           <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
           <button class="nav-button" id="loginBtn">
             <i class="fas fa-sign-in-alt"></i>Увійти
@@ -60,7 +59,7 @@
       <!-- Orders Section -->
       <section class="orders-section" id="orders">
         <div class="container">
-          <h2 class="section-title">Перегляд заявок</h2>
+          <h2 class="section-title">Перегляд заявок на заняття</h2>
 
           <div class="orders-filter">
             <div class="filter-group">
@@ -73,7 +72,7 @@
                   Очікують розгляду
                 </button>
                 <button class="filter-btn" data-status="completed">
-                  Виконані
+                  Підтверджені
                 </button>
                 <button class="filter-btn" data-status="rejected">
                   Відхилені
@@ -82,30 +81,22 @@
             </div>
 
             <div class="filter-group">
-              <div class="filter-title">Фільтрувати за галуззю:</div>
+              <div class="filter-title">Фільтрувати за предметом:</div>
               <div class="industry-filter">
                 <select id="industryFilter" class="industry-select">
-                  <option value="all">Всі галузі</option>
-                  <option value="Інформаційні технології">
-                    Інформаційні технології
+                  <option value="all">Всі предмети</option>
+                  <option value="Математика">Математика</option>
+                  <option value="Фізика">Фізика</option>
+                  <option value="Хімія">Хімія</option>
+                  <option value="Українська мова та література">
+                    Українська мова та література
                   </option>
-                  <option value="Медицина">Медицина</option>
-                  <option value="Енергетика">Енергетика</option>
-                  <option value="Аграрна галузь">Аграрна галузь</option>
-                  <option value="Фінанси та банківська справа">
-                    Фінанси та банківська справа
-                  </option>
-                  <option value="Освіта">Освіта</option>
-                  <option value="Туризм і гостинність">
-                    Туризм і гостинність
-                  </option>
-                  <option value="Будівництво та нерухомість">
-                    Будівництво та нерухомість
-                  </option>
-                  <option value="Транспорт">Транспорт</option>
-                  <option value="Мистецтво і культура">
-                    Мистецтво і культура
-                  </option>
+                  <option value="Англійська мова">Англійська мова</option>
+                  <option value="Історія України">Історія України</option>
+                  <option value="Біологія">Біологія</option>
+                  <option value="Інформатика">Інформатика</option>
+                  <option value="Географія">Географія</option>
+                  <option value="Іноземні мови">Іноземні мови</option>
                 </select>
               </div>
             </div>
@@ -160,23 +151,23 @@
       </div>
     </div>
 
-    <!-- Industry Mismatch Modal -->
+    <!-- Subject Mismatch Modal -->
     <div class="modal-overlay" id="industryMismatchModal">
       <div class="order-modal">
         <button class="modal-close" id="industryModalClose">
           <i class="fas fa-times"></i>
         </button>
         <div class="order-modal-content">
-          <h2 class="modal-title">Невідповідність галузі</h2>
+          <h2 class="modal-title">Невідповідність предмету</h2>
           <div class="modal-info-group">
             <div class="modal-value">
               <i class="fas fa-exclamation-triangle warning-icon"></i>
               <p>
                 Ви не можете прийняти цю заявку, оскільки вона не відповідає
-                вашій галузі.
+                вашому предмету викладання.
               </p>
-              <p>Ваша галузь: <span id="masterIndustry">Не вказано</span></p>
-              <p>Галузь заявки: <span id="orderIndustry">Не вказано</span></p>
+              <p>Ваш предмет: <span id="masterIndustry">Не вказано</span></p>
+              <p>Предмет заявки: <span id="orderIndustry">Не вказано</span></p>
             </div>
           </div>
         </div>
@@ -216,130 +207,131 @@
       </div>
     </div>
 
-   <!-- Footer -->
-   <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-section">
-        <div class="footer-logo">
-          <i class="fas fa-tools"></i>
-          ProFix Network Hub
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-graduation-cap"></i>
+            Tutor Network Hub
+          </div>
+          <p class="footer-description">
+            Tutor Network Hub — ваш надійний партнер у світі освіти. Ми
+            об'єднуємо досвідчених репетиторів та учнів, щоб забезпечити
+            найкращі результати навчання з різних предметів.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
         </div>
-        <p class="footer-description">
-          ProFix Network Hub — ваш надійний партнер у світі професійних
-          послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
-          рішення для ваших потреб у різних галузях.
+        <div class="footer-section">
+          <h3 class="footer-title">Швидкі посилання</h3>
+          <ul class="footer-links">
+            <li class="footer-link">
+              <a href="index.html">
+                <i class="fas fa-chevron-right"></i> Головна
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="index.html#industries">
+                <i class="fas fa-chevron-right"></i> Предмети
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="index.html#order">
+                <i class="fas fa-chevron-right"></i> Замовити заняття
+              </a>
+            </li>
+            <li class="footer-link" id="profileFooterLink">
+              <a href="profile.html">
+                <i class="fas fa-chevron-right"></i> Профіль
+              </a>
+            </li>
+            <li class="footer-link" id="news">
+              <a href="news.html">
+                <i class="fas fa-chevron-right"></i> Новини
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="auth.html">
+                <i class="fas fa-chevron-right"></i> Авторизація
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="./admin-login.html">
+                <i class="fas fa-chevron-right"></i> Адмін-панель
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Контакти</h3>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Адреса</div>
+              <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">
+                <a href="tel:+380123456789">+380 96 538 3239</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:info@profixhub.com"
+                  >24g_chvv@liceum.ztu.edu.ua</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Графік роботи</div>
+              <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2025 Tutor Network Hub. Всі права захищені.
         </p>
-        <div class="footer-social">
-          <a href="#" class="social-icon" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="social-icon" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" class="social-icon" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="social-icon" aria-label="YouTube">
-            <i class="fab fa-youtube"></i>
-          </a>
-        </div>
       </div>
-      <div class="footer-section">
-        <h3 class="footer-title">Швидкі посилання</h3>
-        <ul class="footer-links">
-          <li class="footer-link">
-            <a href="index.html">
-              <i class="fas fa-chevron-right"></i> Головна
-            </a>
-          </li>
-          <li class="footer-link">
-            <a href="#industries">
-              <i class="fas fa-chevron-right"></i> Галузі
-            </a>
-          </li>
-          <li class="footer-link">
-            <a href="#order">
-              <i class="fas fa-chevron-right"></i> Замовити
-            </a>
-          </li>
-          <li class="footer-link" id="profileFooterLink">
-            <a href="profile.html">
-              <i class="fas fa-chevron-right"></i> Профіль
-            </a>
-          </li>
-          <li class="footer-link" id="news">
-            <a href="news.html">
-              <i class="fas fa-chevron-right"></i> Новини
-            </a>
-          </li>
-          <li class="footer-link">
-            <a href="auth.html">
-              <i class="fas fa-chevron-right"></i> Авторизація
-            </a>
-          </li>
-          <li class="footer-link">
-            <a href="./admin-login.html">
-              <i class="fas fa-chevron-right"></i> Адмін-панель
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3 class="footer-title">Контакти</h3>
-        <div class="footer-contact">
-          <div class="contact-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="contact-info">
-            <div class="contact-label">Адреса</div>
-            <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
-          </div>
-        </div>
-        <div class="footer-contact">
-          <div class="contact-icon">
-            <i class="fas fa-phone-alt"></i>
-          </div>
-          <div class="contact-info">
-            <div class="contact-label">Телефон</div>
-            <div class="contact-value">
-              <a href="tel:+380123456789">+380 96 538 3239</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-contact">
-          <div class="contact-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <div class="contact-info">
-            <div class="contact-label">Email</div>
-            <div class="contact-value">
-              <a href="mailto:info@profixhub.com">24g_chvv@liceum.ztu.edu.ua</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-contact">
-          <div class="contact-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <div class="contact-info">
-            <div class="contact-label">Графік роботи</div>
-            <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p class="copyright">
-        &copy; 2025 ProFix Network Hub. Всі права захищені.
-      </p>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="./js/role.js"></script>
+    <script src="./js/role.js"></script>
     <!-- Socket.io script -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js/order.js"></script>
     <script src="auth.js"></script>
-    <script src="role.js"></script>
   </body>
 </html>

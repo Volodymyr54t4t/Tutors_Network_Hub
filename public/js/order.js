@@ -1,7 +1,7 @@
 // Global variables
 let allOrders = [];
 let currentFilter = "all";
-let currentIndustryFilter = "all";
+let currentSubjectFilter = "all";
 let userRole = null;
 let userId = null;
 let socket = null;
@@ -15,7 +15,7 @@ let totalPages = 1;
 const ordersContainer = document.getElementById("ordersContainer");
 const noOrdersMessage = document.getElementById("noOrdersMessage");
 const filterButtons = document.querySelectorAll(".filter-btn");
-const industryFilter = document.getElementById("industryFilter");
+const subjectFilter = document.getElementById("industryFilter"); // Keep the ID for compatibility
 const orderDetailsModal = document.getElementById("orderDetailsModal");
 const orderModalClose = document.getElementById("orderModalClose");
 const orderModalContent = document.getElementById("orderModalContent");
@@ -59,7 +59,7 @@ function initializeSocket() {
       // Add the new order to our list if it's not already there
       if (!allOrders.some((o) => o.id === order.id)) {
         allOrders.unshift(order);
-        showNotification("Отримано нову заявку", "info");
+        showNotification("Отримано нову заявку на заняття", "info");
         filterAndRenderOrders();
       }
     });
@@ -117,7 +117,7 @@ function checkUserLoggedIn() {
     })
     .then((data) => {
       if (data.profile) {
-        userRole = data.profile.role_master ? "master" : "user";
+        userRole = data.profile.role_master ? "tutor" : "user";
 
         // Check if user is admin (for demo purposes, user with ID 1 is admin)
         if (userId === "1") {
@@ -145,35 +145,35 @@ function updateUIForRole() {
   if (userRole === "admin") {
     // Admin can see all orders
     fetchOrders("/orders");
-  } else if (userRole === "master") {
-    // Masters can see pending orders and their own orders
-    fetchOrders(`/orders/master/${userId}`);
+  } else if (userRole === "tutor") {
+    // Tutors can see pending orders and their own orders
+    fetchOrders(`/orders/tutor/${userId}`);
 
-    // Also fetch user's selected industry
-    fetchMasterIndustry();
+    // Also fetch user's selected subject
+    fetchTutorSubject();
   } else {
     // Regular users can only see their own orders
     fetchOrders(`/orders/user/${userId}`);
   }
 }
 
-// Fetch master's selected industry
-function fetchMasterIndustry() {
-  fetch(`/api/user-selected-industry/${userId}`)
+// Fetch tutor's selected subject
+function fetchTutorSubject() {
+  fetch(`/api/user-selected-subject/${userId}`)
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Failed to fetch master industry");
+        throw new Error("Failed to fetch tutor subject");
       }
       return response.json();
     })
     .then((data) => {
-      if (data.success && data.selectedIndustry) {
-        // Store the master's industry for later use
-        localStorage.setItem("masterIndustry", data.selectedIndustry);
+      if (data.success && data.selectedSubject) {
+        // Store the tutor's subject for later use
+        localStorage.setItem("tutorSubject", data.selectedSubject);
       }
     })
     .catch((error) => {
-      console.error("Error fetching master industry:", error);
+      console.error("Error fetching tutor subject:", error);
     });
 }
 
@@ -193,9 +193,9 @@ function setupEventListeners() {
     });
   });
 
-  // Industry filter
-  industryFilter.addEventListener("change", () => {
-    currentIndustryFilter = industryFilter.value;
+  // Subject filter
+  subjectFilter.addEventListener("change", () => {
+    currentSubjectFilter = subjectFilter.value;
     currentPage = 1; // Reset to first page when filter changes
     filterAndRenderOrders();
   });
@@ -338,10 +338,10 @@ function filterAndRenderOrders() {
     );
   }
 
-  // Apply industry filter
-  if (currentIndustryFilter !== "all") {
+  // Apply subject filter
+  if (currentSubjectFilter !== "all") {
     filteredOrders = filteredOrders.filter(
-      (order) => order.industry === currentIndustryFilter
+      (order) => order.industry === currentSubjectFilter
     );
   }
 
@@ -419,15 +419,15 @@ function renderOrders(orders, totalCount) {
         : order.description
       : "Опис відсутній";
 
-    // Get industry icon
-    const industryIcon = getIndustryIcon(order.industry);
+    // Get subject icon
+    const subjectIcon = getSubjectIcon(order.industry);
 
     orderCard.innerHTML = `
       <div class="order-status ${statusClass}">${statusText}</div>
       <h3 class="order-title">${order.title}</h3>
       <div class="order-industry">
-        <i class="${industryIcon}"></i>
-        <span>${order.industry || "Галузь не вказана"}</span>
+        <i class="${subjectIcon}"></i>
+        <span>${order.industry || "Предмет не вказаний"}</span>
       </div>
       <p class="order-description">${shortDescription}</p>
       <div class="order-meta">
@@ -444,9 +444,9 @@ function renderOrders(orders, totalCount) {
       </div>
     `;
 
-    // Add action buttons for masters and admins if order is pending
+    // Add action buttons for tutors and admins if order is pending
     if (
-      (userRole === "master" || userRole === "admin") &&
+      (userRole === "tutor" || userRole === "admin") &&
       order.status === "pending"
     ) {
       const actionsDiv = orderCard.querySelector(".order-actions");
@@ -490,37 +490,37 @@ function addOrderButtonListeners() {
     button.addEventListener("click", () => {
       const orderId = button.dataset.id;
 
-      // Check if master's industry matches the order's industry
-      if (userRole === "master") {
+      // Check if tutor's subject matches the order's subject
+      if (userRole === "tutor") {
         const order = allOrders.find((o) => o.id == orderId);
-        const masterIndustry = localStorage.getItem("masterIndustry");
+        const tutorSubject = localStorage.getItem("tutorSubject");
 
-        if (order && masterIndustry && order.industry !== masterIndustry) {
-          // Show industry mismatch modal
-          const industryMismatchModal = document.getElementById(
+        if (order && tutorSubject && order.industry !== tutorSubject) {
+          // Show subject mismatch modal
+          const subjectMismatchModal = document.getElementById(
             "industryMismatchModal"
           );
-          const masterIndustrySpan = document.getElementById("masterIndustry");
-          const orderIndustrySpan = document.getElementById("orderIndustry");
+          const tutorSubjectSpan = document.getElementById("masterIndustry");
+          const orderSubjectSpan = document.getElementById("orderIndustry");
 
-          masterIndustrySpan.textContent = masterIndustry;
-          orderIndustrySpan.textContent = order.industry;
+          tutorSubjectSpan.textContent = tutorSubject;
+          orderSubjectSpan.textContent = order.industry;
 
-          industryMismatchModal.classList.add("active");
+          subjectMismatchModal.classList.add("active");
 
           // Add event listener to close button
-          const industryModalClose =
+          const subjectModalClose =
             document.getElementById("industryModalClose");
-          const industryModalCloseBtn = document.getElementById(
+          const subjectModalCloseBtn = document.getElementById(
             "industryModalCloseBtn"
           );
 
-          industryModalClose.addEventListener("click", () => {
-            industryMismatchModal.classList.remove("active");
+          subjectModalClose.addEventListener("click", () => {
+            subjectMismatchModal.classList.remove("active");
           });
 
-          industryModalCloseBtn.addEventListener("click", () => {
-            industryMismatchModal.classList.remove("active");
+          subjectModalCloseBtn.addEventListener("click", () => {
+            subjectMismatchModal.classList.remove("active");
           });
 
           return;
@@ -528,8 +528,9 @@ function addOrderButtonListeners() {
       }
 
       // Show confirmation modal
-      showConfirmationModal("Ви впевнені, що хочете прийняти цю заявку?", () =>
-        updateOrderStatus(orderId, "completed")
+      showConfirmationModal(
+        "Ви впевнені, що хочете прийняти цю заявку на заняття?",
+        () => updateOrderStatus(orderId, "completed")
       );
     });
   });
@@ -541,8 +542,9 @@ function addOrderButtonListeners() {
       const orderId = button.dataset.id;
 
       // Show confirmation modal
-      showConfirmationModal("Ви впевнені, що хочете відхилити цю заявку?", () =>
-        updateOrderStatus(orderId, "rejected")
+      showConfirmationModal(
+        "Ви впевнені, що хочете відхилити цю заявку на заняття?",
+        () => updateOrderStatus(orderId, "rejected")
       );
     });
   });
@@ -592,8 +594,8 @@ function showOrderDetails(orderId) {
   const statusClass = getStatusClass(order.status);
   const statusText = getStatusText(order.status);
 
-  // Get industry icon
-  const industryIcon = getIndustryIcon(order.industry);
+  // Get subject icon
+  const subjectIcon = getSubjectIcon(order.industry);
 
   // Populate modal content
   orderModalContent.innerHTML = `
@@ -605,15 +607,15 @@ function showOrderDetails(orderId) {
     </div>
     
     <div class="modal-info-group">
-      <span class="modal-label">Галузь:</span>
+      <span class="modal-label">Предмет:</span>
       <div class="modal-value">
-        <i class="${industryIcon}"></i>
+        <i class="${subjectIcon}"></i>
         ${order.industry || "Не вказано"}
       </div>
     </div>
     
     <div class="modal-info-group">
-      <span class="modal-label">Опис проблеми:</span>
+      <span class="modal-label">Опис запиту:</span>
       <div class="modal-value">${order.description || "Опис відсутній"}</div>
     </div>
     
@@ -625,7 +627,7 @@ function showOrderDetails(orderId) {
     </div>
     
     <div class="modal-info-group">
-      <span class="modal-label">Замовник:</span>
+      <span class="modal-label">Учень:</span>
       <div class="modal-value">
         ${order.user_first_name || ""} ${order.user_last_name || ""} 
         ${
@@ -647,17 +649,17 @@ function showOrderDetails(orderId) {
     </div>
   `;
 
-  // Add master info if assigned
+  // Add tutor info if assigned
   if (order.master_id) {
-    const masterName =
+    const tutorName =
       order.master_first_name || order.master_last_name
         ? `${order.master_first_name || ""} ${order.master_last_name || ""}`
         : order.master_username || "Невідомо";
 
     orderModalContent.innerHTML += `
       <div class="modal-info-group">
-        <span class="modal-label">Майстер:</span>
-        <div class="modal-value">${masterName}</div>
+        <span class="modal-label">Репетитор:</span>
+        <div class="modal-value">${tutorName}</div>
       </div>
     `;
   }
@@ -666,7 +668,7 @@ function showOrderDetails(orderId) {
   orderModalActions.innerHTML = "";
 
   if (
-    (userRole === "master" || userRole === "admin") &&
+    (userRole === "tutor" || userRole === "admin") &&
     order.status === "pending"
   ) {
     orderModalActions.innerHTML = `
@@ -694,37 +696,37 @@ function showOrderDetails(orderId) {
     modalAcceptBtn.addEventListener("click", () => {
       const orderId = modalAcceptBtn.dataset.id;
 
-      // Check if master's industry matches the order's industry
-      if (userRole === "master") {
-        const masterIndustry = localStorage.getItem("masterIndustry");
+      // Check if tutor's subject matches the order's subject
+      if (userRole === "tutor") {
+        const tutorSubject = localStorage.getItem("tutorSubject");
 
-        if (masterIndustry && order.industry !== masterIndustry) {
-          // Show industry mismatch modal
-          const industryMismatchModal = document.getElementById(
+        if (tutorSubject && order.industry !== tutorSubject) {
+          // Show subject mismatch modal
+          const subjectMismatchModal = document.getElementById(
             "industryMismatchModal"
           );
-          const masterIndustrySpan = document.getElementById("masterIndustry");
-          const orderIndustrySpan = document.getElementById("orderIndustry");
+          const tutorSubjectSpan = document.getElementById("masterIndustry");
+          const orderSubjectSpan = document.getElementById("orderIndustry");
 
-          masterIndustrySpan.textContent = masterIndustry;
-          orderIndustrySpan.textContent = order.industry;
+          tutorSubjectSpan.textContent = tutorSubject;
+          orderSubjectSpan.textContent = order.industry;
 
-          industryMismatchModal.classList.add("active");
+          subjectMismatchModal.classList.add("active");
           orderDetailsModal.classList.remove("active");
 
           // Add event listener to close button
-          const industryModalClose =
+          const subjectModalClose =
             document.getElementById("industryModalClose");
-          const industryModalCloseBtn = document.getElementById(
+          const subjectModalCloseBtn = document.getElementById(
             "industryModalCloseBtn"
           );
 
-          industryModalClose.addEventListener("click", () => {
-            industryMismatchModal.classList.remove("active");
+          subjectModalClose.addEventListener("click", () => {
+            subjectMismatchModal.classList.remove("active");
           });
 
-          industryModalCloseBtn.addEventListener("click", () => {
-            industryMismatchModal.classList.remove("active");
+          subjectModalCloseBtn.addEventListener("click", () => {
+            subjectMismatchModal.classList.remove("active");
           });
 
           return;
@@ -733,8 +735,9 @@ function showOrderDetails(orderId) {
 
       // Show confirmation modal
       orderDetailsModal.classList.remove("active");
-      showConfirmationModal("Ви впевнені, що хочете прийняти цю заявку?", () =>
-        updateOrderStatus(orderId, "completed")
+      showConfirmationModal(
+        "Ви впевнені, що хочете прийняти цю заявку на заняття?",
+        () => updateOrderStatus(orderId, "completed")
       );
     });
   }
@@ -746,8 +749,9 @@ function showOrderDetails(orderId) {
 
       // Show confirmation modal
       orderDetailsModal.classList.remove("active");
-      showConfirmationModal("Ви впевнені, що хочете відхилити цю заявку?", () =>
-        updateOrderStatus(orderId, "rejected")
+      showConfirmationModal(
+        "Ви впевнені, що хочете відхилити цю заявку на заняття?",
+        () => updateOrderStatus(orderId, "rejected")
       );
     });
   }
@@ -858,7 +862,7 @@ function getStatusText(status) {
     case "pending":
       return "Очікує розгляду";
     case "completed":
-      return "Виконано";
+      return "Підтверджено";
     case "rejected":
       return "Відхилено";
     default:
@@ -866,22 +870,22 @@ function getStatusText(status) {
   }
 }
 
-// Helper function to get industry icon
-function getIndustryIcon(industry) {
-  const industryIcons = {
-    "Інформаційні технології": "fas fa-laptop-code",
-    Медицина: "fas fa-heartbeat",
-    Енергетика: "fas fa-bolt",
-    "Аграрна галузь": "fas fa-tractor",
-    "Фінанси та банківська справа": "fas fa-money-bill-wave",
-    Освіта: "fas fa-graduation-cap",
-    "Туризм і гостинність": "fas fa-plane",
-    "Будівництво та нерухомість": "fas fa-hard-hat",
-    Транспорт: "fas fa-truck",
-    "Мистецтво і культура": "fas fa-palette",
+// Helper function to get subject icon
+function getSubjectIcon(subject) {
+  const subjectIcons = {
+    Математика: "fas fa-calculator",
+    Фізика: "fas fa-atom",
+    Хімія: "fas fa-flask",
+    "Українська мова та література": "fas fa-book",
+    "Англійська мова": "fas fa-language",
+    "Історія України": "fas fa-landmark",
+    Біологія: "fas fa-dna",
+    Інформатика: "fas fa-laptop-code",
+    Географія: "fas fa-globe-americas",
+    "Іноземні мови": "fas fa-comments",
   };
 
-  return industryIcons[industry] || "fas fa-briefcase";
+  return subjectIcons[subject] || "fas fa-graduation-cap";
 }
 
 // Show notification
@@ -929,80 +933,78 @@ function showNotification(message, type = "info") {
     notification.classList.remove("active");
   }, 5000);
 }
-//role.js
+
+// Function to check if user is logged in
+// Function to redirect to auth page
+function redirectToAuth() {
+  // Replace with actual implementation
+  window.location.href = "auth.html";
+}
+
+// Function to log out user
+function logoutUser() {
+  // Replace with actual implementation
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  window.location.href = "index.html";
+}
+
+// Update UI based on login status
 function updateUIForLoginStatus() {
-  const isLoggedIn = checkUserLoggedIn()
-  const orderSection = document.getElementById("order")
-  const orderLink = document.getElementById("orderLink")
-  const profileLink = document.getElementById("profileLink")
-  const profileFooterLink = document.getElementById("profileFooterLink")
-  const loginBtn = document.getElementById("loginBtn")
-  const loginModal = document.getElementById("loginModal")
-  const reviewSection = document.getElementById("review-form")
+  const isLoggedIn = checkUserLoggedIn();
+  const orderSection = document.getElementById("order");
+  const orderLink = document.getElementById("orderLink");
+  const profileLink = document.getElementById("profileLink");
+  const profileFooterLink = document.getElementById("profileFooterLink");
+  const loginBtn = document.getElementById("loginBtn");
+  const loginModal = document.getElementById("loginModal");
 
   if (isLoggedIn) {
     // User is logged in
-    if (orderSection) orderSection.style.display = "block"
-    if (orderLink) orderLink.style.display = "block"
-    if (profileLink) profileLink.style.display = "block"
-    if (profileFooterLink) profileFooterLink.style.display = "block"
-    if (reviewSection) reviewSection.style.display = "block"
+    if (orderSection) orderSection.style.display = "block";
+    if (orderLink) orderLink.style.display = "block";
+    if (profileLink) profileLink.style.display = "block";
+    if (profileFooterLink) profileFooterLink.style.display = "block";
     if (loginBtn) {
-      loginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Вийти'
-      loginBtn.removeEventListener("click", redirectToAuth)
-      loginBtn.addEventListener("click", logoutUser)
+      loginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Вийти';
+      loginBtn.removeEventListener("click", redirectToAuth);
+      loginBtn.addEventListener("click", logoutUser);
     }
 
     // Check user role and update UI accordingly
-    const userId = localStorage.getItem("userId")
+    const userId = localStorage.getItem("userId");
     if (userId && window.RoleSystem) {
-      window.RoleSystem.checkUserRole(userId)
+      window.RoleSystem.checkUserRole(userId);
     } else {
-      // If RoleSystem is not available, hide master elements by default
-      const infoLink = document.getElementById("info")
-      if (infoLink) infoLink.style.display = "none"
+      // If RoleSystem is not available, hide tutor elements by default
+      const infoLink = document.getElementById("info");
+      if (infoLink) infoLink.style.display = "none";
     }
   } else {
     // User is not logged in
-    if (orderSection) orderSection.style.display = "none"
-    if (orderLink) orderLink.style.display = "none"
-    if (profileLink) profileLink.style.display = "none"
-    if (profileFooterLink) profileFooterLink.style.display = "none"
-    if (reviewSection) reviewSection.style.display = "none"
+    if (orderSection) orderSection.style.display = "none";
+    if (orderLink) orderLink.style.display = "none";
+    if (profileLink) profileLink.style.display = "none";
+    if (profileFooterLink) profileFooterLink.style.display = "none";
     if (loginBtn) {
-      loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Увійти'
-      loginBtn.removeEventListener("click", logoutUser)
-      loginBtn.addEventListener("click", redirectToAuth)
+      loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Увійти';
+      loginBtn.removeEventListener("click", logoutUser);
+      loginBtn.addEventListener("click", redirectToAuth);
     }
 
     // Show login modal for new users
     if (loginModal && !localStorage.getItem("modalShown")) {
       setTimeout(() => {
-        loginModal.classList.add("active")
-        localStorage.setItem("modalShown", "true")
-      }, 1500)
+        loginModal.classList.add("active");
+        localStorage.setItem("modalShown", "true");
+      }, 1500);
     }
 
-    // Hide master elements for non-logged in users
-    const infoLink = document.getElementById("info")
-    if (infoLink) infoLink.style.display = "none"
+    // Hide tutor elements for non-logged in users
+    const infoLink = document.getElementById("info");
+    if (infoLink) infoLink.style.display = "none";
   }
 }
 
-// Mock functions to resolve undeclared variable errors.  These should be replaced with actual implementations.
-function checkUserLoggedIn() {
-  // Replace with actual implementation
-  return localStorage.getItem("token") !== null
-}
-
-function redirectToAuth() {
-  // Replace with actual implementation
-  window.location.href = "/auth" // Or wherever your auth endpoint is
-}
-
-function logoutUser() {
-  // Replace with actual implementation
-  localStorage.removeItem("token")
-  localStorage.removeItem("userId")
-  updateUIForLoginStatus() // Refresh the UI
-}
+// Call updateUIForLoginStatus when the page loads
+document.addEventListener("DOMContentLoaded", updateUIForLoginStatus);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Форма повідомлення</title>
+    <title>Повідомлення репетитору</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -16,42 +16,43 @@
     <link rel="stylesheet" href="css/header.css" />
   </head>
   <body>
-   <!-- Header -->
-   <header class="header">
-    <div class="header-container">
-      <a href="index.html" class="logo">
-        <i class="fas fa-tools"></i>
-        <span>ProFix Network Hub</span>
-      </a>
-      <div class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link active">Головна</a>
-        <a href="message.html" class="nav-link" id="message">Повідомлення</a>
-
-        <a href="chat.html" class="nav-link" id="chat">Чат</a>
-        <a href="news.html" class="nav-link" id="news">Новини</a>
-        <a href="info.html" class="nav-link" id="info"
-          >Повідомлення(майстри)</a
-        >
-        <a href="order.html" class="nav-link" id="orders">Замовлення</a>
-        <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
-        <button class="nav-button" id="loginBtn">
-          <i class="fas fa-sign-in-alt"></i>Увійти
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span>ProFix Network Hub</span>
+        </a>
+        <div class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link">Головна</a>
+          <a href="message.html" class="nav-link active" id="message"
+            >Повідомлення</a
+          >
+          <a href="chat.html" class="nav-link" id="chat">Чат</a>
+          <a href="news.html" class="nav-link" id="news">Новини</a>
+          <a href="info.html" class="nav-link" id="info"
+            >Повідомлення(репетитори)</a
+          >
+          <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+          <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+          <button class="nav-button" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i>Увійти
+          </button>
+          <label class="theme-switch"
+            ><input type="checkbox" id="themeToggle" /><span class="slider">
+              <span class="moon">🌙</span><span class="sun">☀️</span></span
+            ></label
+          >
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
         </button>
-        <label class="theme-switch"
-          ><input type="checkbox" id="themeToggle" /><span class="slider">
-            <span class="moon">🌙</span><span class="sun">☀️</span></span
-          ></label
-        >
       </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </header>
+    </header>
 
     <div class="container">
       <div class="message-form-container">
-        <h1 class="message-form-title">Надіслати повідомлення</h1>
+        <h1 class="message-form-title">Надіслати повідомлення репетитору</h1>
 
         <form id="messageForm" class="message-form">
           <div class="form-group">
@@ -62,7 +63,7 @@
               placeholder=" "
               required
             />
-            <label for="username">Ім'я</label>
+            <label for="username">Ваше ім'я</label>
           </div>
 
           <div class="form-group">
@@ -97,79 +98,63 @@
             </div>
           </div>
 
-          <!-- Додавання вибору галузі -->
+          <!-- Вибір предмету навчання -->
           <div class="industry-selector">
-            <h3>Виберіть галузь</h3>
+            <h3>Виберіть предмет</h3>
             <div class="checkbox-grid">
               <label class="checkbox-label">
+                <input type="checkbox" name="subject" value="Математика" />
+                <i class="fas fa-square-root-alt"></i>
+                <span>Математика</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="subject" value="Фізика" />
+                <i class="fas fa-atom"></i>
+                <span>Фізика</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="subject" value="Хімія" />
+                <i class="fas fa-flask"></i>
+                <span>Хімія</span>
+              </label>
+              <label class="checkbox-label">
                 <input
                   type="checkbox"
-                  name="industry"
-                  value="Інформаційні технології"
+                  name="subject"
+                  value="Українська мова та література"
                 />
+                <i class="fas fa-book"></i>
+                <span>Українська мова та література</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="subject" value="Англійська мова" />
+                <i class="fas fa-language"></i>
+                <span>Англійська мова</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="subject" value="Історія України" />
+                <i class="fas fa-landmark"></i>
+                <span>Історія України</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="subject" value="Біологія" />
+                <i class="fas fa-dna"></i>
+                <span>Біологія</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="subject" value="Інформатика" />
                 <i class="fas fa-laptop-code"></i>
-                <span>Інформаційні технології</span>
+                <span>Інформатика</span>
               </label>
               <label class="checkbox-label">
-                <input type="checkbox" name="industry" value="Медицина" />
-                <i class="fas fa-heartbeat"></i>
-                <span>Медицина</span>
+                <input type="checkbox" name="subject" value="Географія" />
+                <i class="fas fa-globe-americas"></i>
+                <span>Географія</span>
               </label>
               <label class="checkbox-label">
-                <input type="checkbox" name="industry" value="Енергетика" />
-                <i class="fas fa-bolt"></i>
-                <span>Енергетика</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" name="industry" value="Аграрна галузь" />
-                <i class="fas fa-tractor"></i>
-                <span>Аграрна галузь</span>
-              </label>
-              <label class="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="industry"
-                  value="Фінанси та банківська справа"
-                />
-                <i class="fas fa-money-bill-wave"></i>
-                <span>Фінанси та банківська справа</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" name="industry" value="Освіта" />
-                <i class="fas fa-graduation-cap"></i>
-                <span>Освіта</span>
-              </label>
-              <label class="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="industry"
-                  value="Туризм і гостинність"
-                />
-                <i class="fas fa-plane"></i>
-                <span>Туризм і гостинність</span>
-              </label>
-              <label class="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="industry"
-                  value="Будівництво та нерухомість"
-                />
-                <i class="fas fa-hard-hat"></i>
-                <span>Будівництво та нерухомість</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" name="industry" value="Транспорт" />
-                <i class="fas fa-truck"></i>
-                <span>Транспорт</span>
-              </label>
-              <label class="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="industry"
-                  value="Мистецтво і культура"
-                />
-                <i class="fas fa-palette"></i>
-                <span>Мистецтво і культура</span>
+                <input type="checkbox" name="subject" value="Іноземні мови" />
+                <i class="fas fa-globe"></i>
+                <span>Іноземні мови</span>
               </label>
             </div>
           </div>
@@ -247,13 +232,13 @@
       <div class="footer-container">
         <div class="footer-section">
           <div class="footer-logo">
-            <i class="fas fa-tools"></i>
+            <i class="fas fa-graduation-cap"></i>
             ProFix Network Hub
           </div>
           <p class="footer-description">
-            ProFix Network Hub — ваш надійний партнер у світі професійних
-            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
-            рішення для ваших потреб у різних галузях.
+            ProFix Network Hub — ваш надійний партнер у світі освіти. Ми
+            об'єднуємо досвідчених репетиторів та учнів, щоб забезпечити
+            найкращі результати навчання з різних предметів.
           </p>
           <div class="footer-social">
             <a href="#" class="social-icon" aria-label="Facebook">
@@ -279,13 +264,13 @@
               </a>
             </li>
             <li class="footer-link">
-              <a href="#industries">
-                <i class="fas fa-chevron-right"></i> Галузі
+              <a href="index.html#industries">
+                <i class="fas fa-chevron-right"></i> Предмети
               </a>
             </li>
             <li class="footer-link">
-              <a href="#order">
-                <i class="fas fa-chevron-right"></i> Замовити
+              <a href="index.html#order">
+                <i class="fas fa-chevron-right"></i> Замовити заняття
               </a>
             </li>
             <li class="footer-link" id="profileFooterLink">
@@ -339,7 +324,9 @@
             <div class="contact-info">
               <div class="contact-label">Email</div>
               <div class="contact-value">
-                <a href="mailto:info@profixhub.com">24g_chvv@liceum.ztu.edu.ua</a>
+                <a href="mailto:info@profixhub.com"
+                  >24g_chvv@liceum.ztu.edu.ua</a
+                >
               </div>
             </div>
           </div>
@@ -361,7 +348,6 @@
       </div>
     </footer>
 
-
     <!-- Back to top button -->
     <button class="back-to-top" id="backToTop">
       <i class="fas fa-arrow-up"></i>
@@ -369,6 +355,5 @@
     <script src="./js/role.js"></script>
     <script src="js/message.js"></script>
     <script src="js/auth.js"></script>
-    <script src="js/role.js"></script>
   </body>
 </html>

@@ -1,5 +1,3 @@
-// Complete fixed profile.js code
-
 // Theme toggle functionality
 document.addEventListener("DOMContentLoaded", () => {
   // Create Order button handler
@@ -85,42 +83,39 @@ document.addEventListener("DOMContentLoaded", () => {
     return null;
   }
 
-  // Function to get all selected industries
-  function getSelectedIndustries() {
+  // Function to get all selected subjects
+  function getSelectedSubjects() {
     const checkboxes = document.querySelectorAll(
       'input[name="industry"]:checked'
     );
     return Array.from(checkboxes).map((cb) => cb.value);
   }
 
-  // Function to save selected industries
-  function saveSelectedIndustries() {
-    const selectedIndustries = getSelectedIndustries();
+  // Function to save selected subjects
+  function saveSelectedSubjects() {
+    const selectedSubjects = getSelectedSubjects();
 
     // Save to localStorage as JSON string
-    localStorage.setItem(
-      "selectedIndustries",
-      JSON.stringify(selectedIndustries)
-    );
+    localStorage.setItem("selectedSubjects", JSON.stringify(selectedSubjects));
 
     // Save to server if user is logged in
     const userId = getUserId();
     if (userId) {
-      fetch(`/api/user-selected-industries/${userId}`, {
+      fetch(`/api/user-selected-subjects/${userId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
-          selectedIndustries: selectedIndustries,
+          selectedSubjects: selectedSubjects,
         }),
       }).catch((err) =>
-        console.error("Failed to save selected industries to server:", err)
+        console.error("Failed to save selected subjects to server:", err)
       );
     }
 
-    return selectedIndustries;
+    return selectedSubjects;
   }
 
   // Function to load user profile
@@ -203,15 +198,15 @@ document.addEventListener("DOMContentLoaded", () => {
           ordersCount.textContent = data.ordersCount || "0";
         }
 
-        // Show services section if user is a master
+        // Show services section if user is a tutor
         toggleServicesSection(data.profile.role_master);
 
-        // Load user services if master
+        // Load user services if tutor
         if (data.profile.role_master) {
           await loadUserServices(userId);
 
-          // After loading services, check for selected industries
-          await loadUserSelectedIndustries();
+          // After loading services, check for selected subjects
+          await loadUserSelectedSubjects();
         }
       }
     } catch (error) {
@@ -220,11 +215,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Function to toggle services section
-  function toggleServicesSection(isMaster) {
+  function toggleServicesSection(isTutor) {
     const servicesDiv = document.getElementById("services");
     if (!servicesDiv) return;
 
-    if (isMaster) {
+    if (isTutor) {
       servicesDiv.style.display = "block";
       setTimeout(() => {
         servicesDiv.classList.add("visible");
@@ -237,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
         servicesDiv.classList.remove("fade-out");
       }, 500);
 
-      // Hide all industry skills sections
+      // Hide all subject skills sections
       document.querySelectorAll(".industry-skills").forEach((section) => {
         section.classList.add("fade-out");
         setTimeout(() => {
@@ -309,56 +304,56 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Function to load user's selected industries
-  async function loadUserSelectedIndustries() {
+  // Function to load user's selected subjects
+  async function loadUserSelectedSubjects() {
     try {
       const userId = getUserId();
       if (!userId) return;
 
       // First try to get from localStorage
-      let selectedIndustries = [];
-      const storedIndustries = localStorage.getItem("selectedIndustries");
+      let selectedSubjects = [];
+      const storedSubjects = localStorage.getItem("selectedSubjects");
 
-      if (storedIndustries) {
+      if (storedSubjects) {
         try {
-          selectedIndustries = JSON.parse(storedIndustries);
+          selectedSubjects = JSON.parse(storedSubjects);
         } catch (e) {
-          console.error("Error parsing stored industries:", e);
+          console.error("Error parsing stored subjects:", e);
         }
       }
 
       // If not in localStorage, try to get from server
-      if (selectedIndustries.length === 0) {
-        const response = await fetch(`/api/user-selected-industries/${userId}`);
+      if (selectedSubjects.length === 0) {
+        const response = await fetch(`/api/user-selected-subjects/${userId}`);
         if (response.ok) {
           const data = await response.json();
           if (
             data.success &&
-            data.selectedIndustries &&
-            data.selectedIndustries.length > 0
+            data.selectedSubjects &&
+            data.selectedSubjects.length > 0
           ) {
-            selectedIndustries = data.selectedIndustries;
+            selectedSubjects = data.selectedSubjects;
             // Save to localStorage for future use
             localStorage.setItem(
-              "selectedIndustries",
-              JSON.stringify(selectedIndustries)
+              "selectedSubjects",
+              JSON.stringify(selectedSubjects)
             );
           }
         }
       }
 
-      // If we have selected industries, check the corresponding checkboxes
-      if (selectedIndustries.length > 0) {
+      // If we have selected subjects, check the corresponding checkboxes
+      if (selectedSubjects.length > 0) {
         // Uncheck all first
         document.querySelectorAll('input[name="industry"]').forEach((cb) => {
           cb.checked = false;
         });
 
-        // Check each selected industry
-        selectedIndustries.forEach((industryValue) => {
+        // Check each selected subject
+        selectedSubjects.forEach((subjectValue) => {
           const checkbox = Array.from(
             document.querySelectorAll('input[name="industry"]')
-          ).find((cb) => cb.value === industryValue);
+          ).find((cb) => cb.value === subjectValue);
 
           if (checkbox) {
             checkbox.checked = true;
@@ -368,10 +363,10 @@ document.addEventListener("DOMContentLoaded", () => {
             checkbox.dispatchEvent(event);
 
             // Also ensure skills section is visible
-            const industry = checkbox.dataset.industry;
-            if (industry) {
+            const subject = checkbox.dataset.industry;
+            if (subject) {
               const skillsSection = document.getElementById(
-                `${industry}-skills`
+                `${subject}-skills`
               );
               if (skillsSection) {
                 skillsSection.classList.add("visible");
@@ -381,7 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     } catch (error) {
-      console.error("Error loading selected industries:", error);
+      console.error("Error loading selected subjects:", error);
     }
   }
 
@@ -409,8 +404,8 @@ document.addEventListener("DOMContentLoaded", () => {
           textarea.value = "";
         });
 
-        const selectedIndustries = [];
-        const selectedIndustryValues = [];
+        const selectedSubjects = [];
+        const selectedSubjectValues = [];
 
         // Process all services
         data.services.forEach((service) => {
@@ -421,9 +416,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (checkbox) {
               checkbox.checked = true;
-              selectedIndustryValues.push(service.service_name);
+              selectedSubjectValues.push(service.service_name);
               if (checkbox.dataset.industry) {
-                selectedIndustries.push(checkbox.dataset.industry);
+                selectedSubjects.push(checkbox.dataset.industry);
               }
             }
           } else if (service.service_type.endsWith("-skills-text")) {
@@ -439,15 +434,15 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        // Save selected industries to localStorage
+        // Save selected subjects to localStorage
         localStorage.setItem(
-          "selectedIndustries",
-          JSON.stringify(selectedIndustryValues)
+          "selectedSubjects",
+          JSON.stringify(selectedSubjectValues)
         );
 
-        // Show industry-specific skills sections
-        selectedIndustries.forEach((industry) => {
-          const skillsSection = document.getElementById(`${industry}-skills`);
+        // Show subject-specific skills sections
+        selectedSubjects.forEach((subject) => {
+          const skillsSection = document.getElementById(`${subject}-skills`);
           if (skillsSection) {
             skillsSection.classList.add("visible");
             // Add random animation class for initial load
@@ -485,7 +480,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(`/orders/user/${userId}`);
 
       if (!response.ok) {
-        throw new Error("Не вдалося завантажити замовлення");
+        throw new Error("Не вдалося завантажити заняття");
       }
 
       const data = await response.json();
@@ -519,7 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="order-body">
               <div class="order-info">
                 <div class="order-info-item">
-                  <div class="order-info-label">Галузь:</div>
+                  <div class="order-info-label">Предмет:</div>
                   <div class="order-info-value">${
                     order.industry || "Не вказано"
                   }</div>
@@ -559,7 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       } else {
         ordersContainer.innerHTML =
-          '<p style="text-align: center; padding: 30px;">У вас ще немає замовлень</p>';
+          '<p style="text-align: center; padding: 30px;">У вас ще немає занять</p>';
       }
     } catch (error) {
       loadingElement.style.display = "none";
@@ -635,7 +630,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ${review.comment || review.text || "Без коментаря"}
             </div>
             <div class="review-order">
-              Замовлення: ${review.order_title || "Замовлення"} (${
+              Заняття: ${review.order_title || "Заняття"} (${
             review.order_id || review.id
           })
             </div>
@@ -778,27 +773,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Enhanced transitions for industry checkboxes
-  let lastActiveIndustry = null;
+  // Enhanced transitions for subject checkboxes
+  let lastActiveSubject = null;
 
   document.querySelectorAll('input[name="industry"]').forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
-      const industry = this.dataset.industry;
-      if (!industry) return;
+      const subject = this.dataset.industry;
+      if (!subject) return;
 
-      const skillsSection = document.getElementById(`${industry}-skills`);
+      const skillsSection = document.getElementById(`${subject}-skills`);
       if (!skillsSection) return;
 
       if (this.checked) {
-        // Save all selected industries
-        const selectedIndustries = saveSelectedIndustries();
-        console.log("Saved industries:", selectedIndustries);
+        // Save all selected subjects
+        const selectedSubjects = saveSelectedSubjects();
+        console.log("Saved subjects:", selectedSubjects);
 
         // Determine animation direction based on position in the list
-        const allIndustries = Array.from(
+        const allSubjects = Array.from(
           document.querySelectorAll('input[name="industry"]')
         );
-        const currentIndex = allIndustries.indexOf(this);
+        const currentIndex = allSubjects.indexOf(this);
 
         // Remove all animation classes first
         skillsSection.classList.remove(
@@ -809,9 +804,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         // Add appropriate animation class
-        if (lastActiveIndustry) {
-          const lastIndex = allIndustries.findIndex(
-            (cb) => cb.dataset.industry === lastActiveIndustry
+        if (lastActiveSubject) {
+          const lastIndex = allSubjects.findIndex(
+            (cb) => cb.dataset.industry === lastActiveSubject
           );
 
           if (currentIndex > lastIndex) {
@@ -825,7 +820,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Show the section with animation
         skillsSection.classList.add("visible");
-        lastActiveIndustry = industry;
+        lastActiveSubject = subject;
       } else {
         // Add fade out animation
         skillsSection.classList.add("fade-out");
@@ -841,18 +836,18 @@ document.addEventListener("DOMContentLoaded", () => {
             "slide-in-bottom"
           );
 
-          // Save all selected industries after unchecking
-          saveSelectedIndustries();
+          // Save all selected subjects after unchecking
+          saveSelectedSubjects();
 
-          // Update last active industry
+          // Update last active subject
           const activeCheckboxes = Array.from(
             document.querySelectorAll('input[name="industry"]:checked')
           );
           if (activeCheckboxes.length > 0) {
-            lastActiveIndustry =
+            lastActiveSubject =
               activeCheckboxes[activeCheckboxes.length - 1].dataset.industry;
           } else {
-            lastActiveIndustry = null;
+            lastActiveSubject = null;
           }
         }, 400);
       }
@@ -1151,7 +1146,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.cancelOrder = async (orderId) => {
-    if (!confirm("Ви впевнені, що хочете скасувати це замовлення?")) {
+    if (!confirm("Ви впевнені, що хочете скасувати це заняття?")) {
       return;
     }
 
@@ -1167,10 +1162,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Не вдалося скасувати замовлення");
+        throw new Error(errorData.message || "Не вдалося скасувати заняття");
       }
 
-      showSuccess("Замовлення успішно скасовано!");
+      showSuccess("Заняття успішно скасовано!");
 
       // Reload orders
       setTimeout(() => {
@@ -1196,14 +1191,11 @@ document.addEventListener("DOMContentLoaded", () => {
   window.saveProfile = async (event) => {
     event.preventDefault();
 
-    // Get all selected industries
-    const selectedIndustries = getSelectedIndustries();
+    // Get all selected subjects
+    const selectedSubjects = getSelectedSubjects();
 
     // Save to localStorage
-    localStorage.setItem(
-      "selectedIndustries",
-      JSON.stringify(selectedIndustries)
-    );
+    localStorage.setItem("selectedSubjects", JSON.stringify(selectedSubjects));
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
@@ -1252,15 +1244,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const profileData = await profileResponse.json();
 
-      // If user is a master, save selected industries and services
+      // If user is a tutor, save selected subjects and services
       if (formData.role_master) {
-        // Get all selected industry checkboxes
-        const selectedIndustryCheckboxes = Array.from(
+        // Get all selected subject checkboxes
+        const selectedSubjectCheckboxes = Array.from(
           document.querySelectorAll('input[name="industry"]:checked')
         );
 
-        if (selectedIndustryCheckboxes.length === 0) {
-          throw new Error("Будь ласка, виберіть хоча б одну галузь");
+        if (selectedSubjectCheckboxes.length === 0) {
+          throw new Error("Будь ласка, виберіть хоча б один предмет");
         }
 
         // First, get existing services to identify which ones to delete
@@ -1276,7 +1268,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const existingServicesData = await existingServicesResponse.json();
 
-        // Delete all existing services (both industries and specific services)
+        // Delete all existing services (both subjects and specific services)
         for (const service of existingServicesData.services) {
           await fetch(`/services/${service.id}`, {
             method: "DELETE",
@@ -1286,8 +1278,8 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
 
-        // Add all the selected industries
-        for (const checkbox of selectedIndustryCheckboxes) {
+        // Add all the selected subjects
+        for (const checkbox of selectedSubjectCheckboxes) {
           await fetch(`/services/${userId}`, {
             method: "POST",
             headers: {
@@ -1300,13 +1292,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }),
           });
 
-          // Now handle services for this industry
-          const industryId = checkbox.dataset.industry;
+          // Now handle services for this subject
+          const subjectId = checkbox.dataset.industry;
           const serviceCheckboxes = document.querySelectorAll(
-            `input[name="service-${industryId}"]:checked`
+            `input[name="service-${subjectId}"]:checked`
           );
 
-          // Add selected services for this industry
+          // Add selected services for this subject
           for (const serviceCheckbox of serviceCheckboxes) {
             await fetch(`/services/${userId}`, {
               method: "POST",
@@ -1321,9 +1313,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
           }
 
-          // Add skills text for this industry if it exists
+          // Add skills text for this subject if it exists
           const skillsTextarea = document.getElementById(
-            `${industryId}-skills-text`
+            `${subjectId}-skills-text`
           );
           if (skillsTextarea && skillsTextarea.value.trim()) {
             await fetch(`/services/${userId}`, {
@@ -1334,7 +1326,7 @@ document.addEventListener("DOMContentLoaded", () => {
               },
               body: JSON.stringify({
                 service_name: skillsTextarea.value.trim(),
-                service_type: `${industryId}-skills-text`,
+                service_type: `${subjectId}-skills-text`,
               }),
             });
           }
@@ -1356,15 +1348,15 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
 
-        // Save all selected industries to the server
-        await fetch(`/api/user-selected-industries/${userId}`, {
+        // Save all selected subjects to the server
+        await fetch(`/api/user-selected-subjects/${userId}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            selectedIndustries: selectedIndustries,
+            selectedSubjects: selectedSubjects,
           }),
         });
       }
@@ -1375,7 +1367,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // If profile requires approval, show message
       if (profileData.requiresApproval) {
         showInfo(
-          "Ваш запит на роль майстра відправлено на розгляд адміністратору"
+          "Ваш запит на роль репетитора відправлено на розгляд адміністратору"
         );
       }
 
@@ -1410,80 +1402,86 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
-//role.js
+
+// Function to check if user is logged in
+function checkUserLoggedIn() {
+  // Replace with actual implementation
+  return localStorage.getItem("token") !== null;
+}
+
+// Function to redirect to auth page
+function redirectToAuth() {
+  // Replace with actual implementation
+  window.location.href = "auth.html";
+}
+
+// Function to log out user
+function logoutUser() {
+  // Replace with actual implementation
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  window.location.href = "index.html";
+}
+
+// Update UI based on login status
 function updateUIForLoginStatus() {
-  const isLoggedIn = checkUserLoggedIn()
-  const orderSection = document.getElementById("order")
-  const orderLink = document.getElementById("orderLink")
-  const profileLink = document.getElementById("profileLink")
-  const profileFooterLink = document.getElementById("profileFooterLink")
-  const loginBtn = document.getElementById("loginBtn")
-  const loginModal = document.getElementById("loginModal")
-  const reviewSection = document.getElementById("review-form")
+  const isLoggedIn = checkUserLoggedIn();
+  const orderSection = document.getElementById("order");
+  const orderLink = document.getElementById("orderLink");
+  const profileLink = document.getElementById("profileLink");
+  const profileFooterLink = document.getElementById("profileFooterLink");
+  const loginBtn = document.getElementById("loginBtn");
+  const loginModal = document.getElementById("loginModal");
+  const reviewSection = document.getElementById("review-form");
 
   if (isLoggedIn) {
     // User is logged in
-    if (orderSection) orderSection.style.display = "block"
-    if (orderLink) orderLink.style.display = "block"
-    if (profileLink) profileLink.style.display = "block"
-    if (profileFooterLink) profileFooterLink.style.display = "block"
-    if (reviewSection) reviewSection.style.display = "block"
+    if (orderSection) orderSection.style.display = "block";
+    if (orderLink) orderLink.style.display = "block";
+    if (profileLink) profileLink.style.display = "block";
+    if (profileFooterLink) profileFooterLink.style.display = "block";
+    if (reviewSection) reviewSection.style.display = "block";
     if (loginBtn) {
-      loginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Вийти'
-      loginBtn.removeEventListener("click", redirectToAuth)
-      loginBtn.addEventListener("click", logoutUser)
+      loginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Вийти';
+      loginBtn.removeEventListener("click", redirectToAuth);
+      loginBtn.addEventListener("click", logoutUser);
     }
 
     // Check user role and update UI accordingly
-    const userId = localStorage.getItem("userId")
+    const userId = localStorage.getItem("userId");
     if (userId && window.RoleSystem) {
-      window.RoleSystem.checkUserRole(userId)
+      window.RoleSystem.checkUserRole(userId);
     } else {
-      // If RoleSystem is not available, hide master elements by default
-      const infoLink = document.getElementById("info")
-      if (infoLink) infoLink.style.display = "none"
+      // If RoleSystem is not available, hide tutor elements by default
+      const infoLink = document.getElementById("info");
+      if (infoLink) infoLink.style.display = "none";
     }
   } else {
     // User is not logged in
-    if (orderSection) orderSection.style.display = "none"
-    if (orderLink) orderLink.style.display = "none"
-    if (profileLink) profileLink.style.display = "none"
-    if (profileFooterLink) profileFooterLink.style.display = "none"
-    if (reviewSection) reviewSection.style.display = "none"
+    if (orderSection) orderSection.style.display = "none";
+    if (orderLink) orderLink.style.display = "none";
+    if (profileLink) profileLink.style.display = "none";
+    if (profileFooterLink) profileFooterLink.style.display = "none";
+    if (reviewSection) reviewSection.style.display = "none";
     if (loginBtn) {
-      loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Увійти'
-      loginBtn.removeEventListener("click", logoutUser)
-      loginBtn.addEventListener("click", redirectToAuth)
+      loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Увійти';
+      loginBtn.removeEventListener("click", logoutUser);
+      loginBtn.addEventListener("click", redirectToAuth);
     }
 
     // Show login modal for new users
     if (loginModal && !localStorage.getItem("modalShown")) {
       setTimeout(() => {
-        loginModal.classList.add("active")
-        localStorage.setItem("modalShown", "true")
-      }, 1500)
+        loginModal.classList.add("active");
+        localStorage.setItem("modalShown", "true");
+      }, 1500);
     }
 
-    // Hide master elements for non-logged in users
-    const infoLink = document.getElementById("info")
-    if (infoLink) infoLink.style.display = "none"
+    // Hide tutor elements for non-logged in users
+    const infoLink = document.getElementById("info");
+    if (infoLink) infoLink.style.display = "none";
   }
 }
 
-// Mock functions to resolve undeclared variable errors.  These should be replaced with actual implementations.
-function checkUserLoggedIn() {
-  // Replace with actual implementation
-  return localStorage.getItem("token") !== null
-}
-
-function redirectToAuth() {
-  // Replace with actual implementation
-  window.location.href = "/auth" // Or wherever your auth endpoint is
-}
-
-function logoutUser() {
-  // Replace with actual implementation
-  localStorage.removeItem("token")
-  localStorage.removeItem("userId")
-  updateUIForLoginStatus() // Refresh the UI
-}
+// Call updateUIForLoginStatus when the page loads
+document.addEventListener("DOMContentLoaded", updateUIForLoginStatus);

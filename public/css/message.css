@@ -463,7 +463,7 @@ html.light .radio-label {
   font-weight: 500;
 }
 
-/* Industry selector styles */
+/* Subject selector styles (formerly industry-selector) */
 .industry-selector {
   margin-bottom: 25px;
   animation: slideInFromRight 0.6s ease-out;
@@ -1078,6 +1078,16 @@ html.light .footer-bottom {
   }
 }
 
+/* Enhanced animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
@@ -1176,148 +1186,21 @@ html.light .footer-bottom {
 
 /* Responsive Styles */
 @media (max-width: 1400px) {
-  .nav-link {
-    font-size: 0.85rem;
-    padding: 5px 7px;
-  }
-
-  .nav-menu {
-    gap: 4px;
-  }
-
-  .nav-button {
-    padding: 5px 10px;
-    font-size: 0.8rem;
-  }
-
-  .theme-switch {
-    width: 45px;
-    height: 24px;
-  }
-
-  .slider:before {
-    height: 16px;
-    width: 16px;
-  }
-
-  input:checked + .slider:before {
-    transform: translateX(21px);
+  .message-form-container {
+    max-width: 90%;
+    padding: 30px;
   }
 }
 
 @media (max-width: 1200px) {
-  .nav-link {
-    font-size: 0.8rem;
-    padding: 4px 6px;
-  }
-
-  .nav-menu {
-    gap: 3px;
-  }
-
-  .nav-button {
-    padding: 4px 8px;
-    font-size: 0.75rem;
-  }
-
-  .theme-switch {
-    width: 40px;
-    height: 22px;
-  }
-
-  .slider:before {
-    height: 14px;
-    width: 14px;
-  }
-
-  input:checked + .slider:before {
-    transform: translateX(18px);
-  }
-
-  .slider .moon,
-  .slider .sun {
-    font-size: 10px;
-  }
-
-  .message-form-container {
-    max-width: 90%;
+  .message-form-title {
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 992px) {
-  .header-container {
-    padding: 15px 20px;
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    height: 100vh;
-    background: #1a2238;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 80px 40px;
-    transition: all 0.4s ease;
-    z-index: 1001;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-    gap: 20px;
-    overflow-y: auto; /* Allow scrolling for many menu items */
-  }
-
-  html.light .nav-menu {
-    background: #f8f9fa;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .nav-link {
-    margin: 5px 0;
-    font-size: 1.1rem;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-  }
-
-  .nav-button {
-    width: 100%;
-    justify-content: center;
-    padding: 10px;
-    font-size: 1rem;
-  }
-
-  .mobile-menu-btn {
-    display: block;
-    z-index: 1002;
-  }
-
-  .theme-switch {
-    margin: 20px 0;
-    width: 50px;
-    height: 26px;
-  }
-
-  .slider:before {
-    height: 18px;
-    width: 18px;
-  }
-
-  input:checked + .slider:before {
-    transform: translateX(24px);
-  }
-
-  .slider .moon,
-  .slider .sun {
-    font-size: 12px;
-  }
-
-  .message-form-title {
-    font-size: 1.8rem;
+  .message-form-container {
+    padding: 25px;
   }
 
   .radio-group {
@@ -1336,7 +1219,7 @@ html.light .footer-bottom {
 
 @media (max-width: 768px) {
   .message-form-container {
-    padding: 30px 20px;
+    padding: 20px;
     margin: 15px auto;
   }
 
@@ -1386,17 +1269,8 @@ html.light .footer-bottom {
 }
 
 @media (max-width: 480px) {
-  .logo {
-    font-size: 1.2rem;
-  }
-
-  .nav-menu {
-    width: 100%;
-    padding: 80px 20px;
-  }
-
   .message-form-container {
-    padding: 20px 15px;
+    padding: 15px;
   }
 
   .message-form-title {

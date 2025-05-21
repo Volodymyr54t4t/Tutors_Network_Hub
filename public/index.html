@@ -6,10 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>ProFix Network Hub - Професійні послуги</title>
+    <title>Tutor Network Hub - Платформа для репетиторів</title>
     <meta
       name="description"
-      content="ProFix Network Hub - платформа, що з'єднує клієнтів з професійними майстрами для різних галузей"
+      content="Tutor Network Hub - платформа, що з'єднує учнів з професійними репетиторами з різних предметів"
     />
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#6a00ff" />
@@ -37,7 +37,7 @@
         </div>
         <div class="install-text">
           <h3>Встановіть додаток</h3>
-          <p>Встановіть ProFix Network Hub для швидкого доступу</p>
+          <p>Встановіть Tutor Network Hub для швидкого доступу</p>
         </div>
       </div>
       <div class="install-actions">
@@ -77,8 +77,8 @@
     <header class="header">
       <div class="header-container">
         <a href="index.html" class="logo">
-          <i class="fas fa-tools"></i>
-          <span>ProFix Network Hub</span>
+          <i class="fas fa-graduation-cap"></i>
+          <span>Tutor Network Hub</span>
         </a>
         <div class="nav-menu" id="navMenu">
           <a href="index.html" class="nav-link active">Головна</a>
@@ -86,7 +86,7 @@
           <a href="chat.html" class="nav-link" id="chat">Чат</a>
           <a href="news.html" class="nav-link" id="news">Новини</a>
           <a href="info.html" class="nav-link" id="info"
-            >Повідомлення(майстри)</a
+            >Повідомлення(репетитори)</a
           >
           <a href="order.html" class="nav-link" id="orders">Замовлення</a>
           <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
@@ -111,19 +111,21 @@
       <!-- Hero Section -->
       <section class="hero">
         <div class="hero-content">
-          <h1 class="hero-title">Професійні послуги для будь-яких потреб</h1>
+          <h1 class="hero-title">
+            Знайдіть ідеального репетитора для навчання
+          </h1>
           <p class="hero-subtitle">
-            Знайдіть найкращих майстрів у різних галузях для вирішення ваших
-            завдань
+            Платформа, що з'єднує учнів з професійними репетиторами з різних
+            предметів
           </p>
           <div class="hero-buttons">
             <button class="hero-btn primary" id="orderNowBtn">
               <i class="fas fa-clipboard-list"></i>
-              Замовити послугу
+              Замовити заняття
             </button>
             <button class="hero-btn secondary" id="findMasterBtn">
               <i class="fas fa-search"></i>
-              Знайти майстра
+              Знайти репетитора
             </button>
           </div>
         </div>
@@ -133,14 +135,14 @@
       <!-- Stats Section -->
       <section class="stats-section" id="stats">
         <div class="container">
-          <h2 class="section-title">ProFix Network Hub у цифрах</h2>
+          <h2 class="section-title">Tutor Network Hub у цифрах</h2>
           <div class="stats-container">
             <div class="stats-card">
               <div class="stats-icon">
                 <i class="fas fa-users"></i>
               </div>
               <div class="stats-number" id="usersCount">0</div>
-              <div class="stats-label">Користувачів</div>
+              <div class="stats-label">Учнів</div>
               <div class="stats-subtext">Зареєстрованих на платформі</div>
               <div class="stats-chart">
                 <canvas id="usersChart"></canvas>
@@ -153,11 +155,11 @@
 
             <div class="stats-card">
               <div class="stats-icon">
-                <i class="fas fa-user-tie"></i>
+                <i class="fas fa-chalkboard-teacher"></i>
               </div>
               <div class="stats-number" id="mastersCount">0</div>
-              <div class="stats-label">Майстрів</div>
-              <div class="stats-subtext">Сертифікованих спеціалістів</div>
+              <div class="stats-label">Репетиторів</div>
+              <div class="stats-subtext">Сертифікованих викладачів</div>
               <div class="stats-chart">
                 <canvas id="mastersChart"></canvas>
               </div>
@@ -172,8 +174,8 @@
                 <i class="fas fa-tasks"></i>
               </div>
               <div class="stats-number" id="ordersCount">0</div>
-              <div class="stats-label">Проектів</div>
-              <div class="stats-subtext">Успішно виконаних замовлень</div>
+              <div class="stats-label">Занять</div>
+              <div class="stats-subtext">Успішно проведених уроків</div>
               <div class="stats-chart">
                 <canvas id="ordersChart"></canvas>
               </div>
@@ -186,12 +188,12 @@
         </div>
       </section>
 
-      <!-- Industries Section -->
+      <!-- Subjects Section (formerly Industries) -->
       <section class="industries-section" id="industries">
         <div class="container">
-          <h2 class="section-title">Галузі</h2>
+          <h2 class="section-title">Предмети</h2>
           <div class="industries-container" id="industriesContainer">
-            <!-- Industries will be dynamically populated -->
+            <!-- Subjects will be dynamically populated -->
           </div>
         </div>
       </section>
@@ -199,7 +201,7 @@
       <!-- Testimonials Section -->
       <section class="testimonials-section" id="testimonials">
         <div class="container">
-          <h2 class="section-title">Відгуки клієнтів</h2>
+          <h2 class="section-title">Відгуки учнів</h2>
           <div class="testimonials-slider" id="testimonialsSlider">
             <div class="testimonials-track" id="testimonialsTrack">
               <!-- Testimonials will be dynamically populated -->
@@ -244,9 +246,9 @@
                 <div class="form-group">
                   <select id="reviewIndustry" name="industry" required>
                     <option value="" disabled selected></option>
-                    <!-- Industries will be dynamically populated -->
+                    <!-- Subjects will be dynamically populated -->
                   </select>
-                  <label for="reviewIndustry">Галузь*</label>
+                  <label for="reviewIndustry">Предмет*</label>
                 </div>
                 <div class="form-group">
                   <div class="rating-container">
@@ -282,7 +284,9 @@
                     name="master"
                     placeholder=" "
                   />
-                  <label for="reviewMaster">Ім'я майстра (якщо знаєте)</label>
+                  <label for="reviewMaster"
+                    >Ім'я репетитора (якщо знаєте)</label
+                  >
                 </div>
                 <button type="submit" class="submit-btn" id="submitReviewBtn">
                   <span>Відправити відгук</span>
@@ -298,12 +302,12 @@
       <!-- Order Form Section -->
       <section class="order-section" id="order">
         <div class="container">
-          <h2 class="section-title">Замовити послугу</h2>
+          <h2 class="section-title">Замовити заняття</h2>
           <div class="order-container">
             <div class="order-image-container">
               <img
-                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                alt="Замовлення послуги"
+                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                alt="Замовлення заняття"
                 class="order-image"
               />
               <div class="order-image-overlay">
@@ -311,7 +315,7 @@
                   <h3>Чому обирають нас?</h3>
                   <ul>
                     <li>
-                      <i class="fas fa-check-circle"></i> Перевірені майстри
+                      <i class="fas fa-check-circle"></i> Перевірені репетитори
                     </li>
                     <li><i class="fas fa-check-circle"></i> Гарантія якості</li>
                     <li><i class="fas fa-check-circle"></i> Швидкий відгук</li>
@@ -331,13 +335,13 @@
                     required
                     placeholder=" "
                   />
-                  <label for="orderTitle">Тема заявки*</label>
+                  <label for="orderTitle">Тема заняття*</label>
                 </div>
                 <div class="form-group">
                   <select id="industrySelect" name="industry" required>
                     <option value="" disabled selected></option>
                   </select>
-                  <label for="industrySelect">Галузь*</label>
+                  <label for="industrySelect">Предмет*</label>
                 </div>
                 <div class="form-group">
                   <textarea
@@ -345,7 +349,7 @@
                     name="description"
                     placeholder=" "
                   ></textarea>
-                  <label for="orderDescription">Опис проблеми</label>
+                  <label for="orderDescription">Опис потреб навчання</label>
                 </div>
                 <div class="form-group">
                   <input
@@ -482,13 +486,13 @@
       <div class="footer-container">
         <div class="footer-section">
           <div class="footer-logo">
-            <i class="fas fa-tools"></i>
-            ProFix Network Hub
+            <i class="fas fa-graduation-cap"></i>
+            Tutor Network Hub
           </div>
           <p class="footer-description">
-            ProFix Network Hub — ваш надійний партнер у світі професійних
-            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
-            рішення для ваших потреб у різних галузях.
+            Tutor Network Hub — ваш надійний партнер у світі освіти. Ми
+            об'єднуємо досвідчених репетиторів та учнів, щоб забезпечити
+            найкращі результати навчання з різних предметів.
           </p>
           <div class="footer-social">
             <a href="#" class="social-icon" aria-label="Facebook">
@@ -515,7 +519,7 @@
             </li>
             <li class="footer-link">
               <a href="#industries">
-                <i class="fas fa-chevron-right"></i> Галузі
+                <i class="fas fa-chevron-right"></i> Предмети
               </a>
             </li>
             <li class="footer-link" id="profileFooterLink">
@@ -569,7 +573,7 @@
             <div class="contact-info">
               <div class="contact-label">Email</div>
               <div class="contact-value">
-                <a href="mailto:info@profixhub.com"
+                <a href="mailto:info@Tutorhub.com"
                   >24g_chvv@liceum.ztu.edu.ua</a
                 >
               </div>
@@ -588,7 +592,7 @@
       </div>
       <div class="footer-bottom">
         <p class="copyright">
-          &copy; 2025 ProFix Network Hub. Всі права захищені.
+          &copy; 2025 Tutor Network Hub. Всі права захищені.
         </p>
       </div>
     </footer>
