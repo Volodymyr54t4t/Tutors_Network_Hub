@@ -18,7 +18,7 @@ const helmet = require("helmet");
 // Load environment variables
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3007;
 
 // Improved database connection configuration
 const pool = new Pool({
@@ -474,6 +474,17 @@ const createTables = async () => {
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;
+  const addCreatedAtToUsersQuery = `
+  DO $$ 
+  BEGIN 
+    IF NOT EXISTS (
+      SELECT FROM information_schema.columns 
+      WHERE table_name = 'users' AND column_name = 'created_at'
+    ) THEN
+      ALTER TABLE users ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+    END IF;
+  END $$;
+`;
 
   // Додаємо колонку industry до таблиці orders, якщо вона не існує
   const addIndustryColumnQuery = `
@@ -497,6 +508,8 @@ const createTables = async () => {
     await executeQuery(masterRequestsTableQuery);
     await executeQuery(ordersTableQuery);
     await executeQuery(addIndustryColumnQuery);
+    await executeQuery(addCreatedAtToUsersQuery);
+
 
     // Fix the reviews table
     await fixReviewsTable();
@@ -5693,28 +5706,28 @@ app.post("/api/news/:id/like", authenticateToken, async (req, res) => {
   }
 });
 //Прохід в адмін панель
-const ADMIN_PASSWORD = '319560';
+const ADMIN_PASSWORD = "319560";
 
 // Middleware для обробки JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Статичні файли
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Маршрут для перевірки пароля
-app.post('/check-password', (req, res) => {
-    const { password } = req.body;
-    
-    // Перевіряємо пароль
-    if (password === ADMIN_PASSWORD) {
-        res.json({ success: true });
-    } else {
-        res.json({ success: false });
-    }
+app.post("/check-password", (req, res) => {
+  const { password } = req.body;
+
+  // Перевіряємо пароль
+  if (password === ADMIN_PASSWORD) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
 });
 
 // Маршрут для адмін-панелі
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "admin.html"));
 });
