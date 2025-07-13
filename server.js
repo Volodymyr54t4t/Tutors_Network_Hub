@@ -14,9 +14,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const compression = require("compression");
 const helmet = require("helmet");
-app.get("/googleef12226500ff3127.html", (req, res) => {
-  res.send("google-site-verification: googleef12226500ff3127.html");
-});
+
 // Load environment variables
 dotenv.config();
 const app = express();
@@ -5731,4 +5729,7 @@ app.post("/check-password", (req, res) => {
 // Маршрут для адмін-панелі
 app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "admin.html"));
+});
+app.get("/googleef12226500ff3127.html", (req, res) => {
+  res.send("google-site-verification: googleef12226500ff3127.html");
 });
