@@ -186,7 +186,7 @@ function createCharts(timelineData) {
       labels: labels,
       datasets: [
         {
-          label: "Учні",
+          label: "Користувачі",
           data: usersData,
           borderColor: "#3498db",
           backgroundColor: "rgba(52, 152, 219, 0.1)",
@@ -206,7 +206,7 @@ function createCharts(timelineData) {
       labels: labels,
       datasets: [
         {
-          label: "Репетитори",
+          label: "Майстри",
           data: mastersData,
           borderColor: "#2980b9",
           backgroundColor: "rgba(41, 128, 185, 0.1)",
@@ -226,7 +226,7 @@ function createCharts(timelineData) {
       labels: labels,
       datasets: [
         {
-          label: "Заняття",
+          label: "Проекти",
           data: ordersData,
           borderColor: "#2ecc71",
           backgroundColor: "rgba(46, 204, 113, 0.1)",
@@ -259,7 +259,7 @@ function createFallbackCharts() {
       labels: months,
       datasets: [
         {
-          label: "Учні",
+          label: "Користувачі",
           data: generateData(80, 10),
           borderColor: "#3498db",
           backgroundColor: "rgba(52, 152, 219, 0.1)",
@@ -279,7 +279,7 @@ function createFallbackCharts() {
       labels: months,
       datasets: [
         {
-          label: "Репетитори",
+          label: "Майстри",
           data: generateData(20, 5),
           borderColor: "#2980b9",
           backgroundColor: "rgba(41, 128, 185, 0.1)",
@@ -299,7 +299,7 @@ function createFallbackCharts() {
       labels: months,
       datasets: [
         {
-          label: "Заняття",
+          label: "Проекти",
           data: generateData(150, 20),
           borderColor: "#2ecc71",
           backgroundColor: "rgba(46, 204, 113, 0.1)",
@@ -503,61 +503,61 @@ document.getElementById("findMasterBtn").addEventListener("click", () => {
   });
 });
 
-// Subject data with icons and descriptions (formerly industry data)
+// Industry data with icons and descriptions
 const industryData = [
   {
-    name: "Математика",
-    icon: "fas fa-square-root-alt",
-    description:
-      "Алгебра, геометрія, тригонометрія, математичний аналіз та підготовка до ЗНО/НМТ",
-  },
-  {
-    name: "Фізика",
-    icon: "fas fa-atom",
-    description:
-      "Механіка, електрика, оптика, термодинаміка та підготовка до ЗНО/НМТ",
-  },
-  {
-    name: "Хімія",
-    icon: "fas fa-flask",
-    description:
-      "Неорганічна та органічна хімія, хімічні реакції та підготовка до ЗНО/НМТ",
-  },
-  {
-    name: "Українська мова та література",
-    icon: "fas fa-book",
-    description: "Граматика, синтаксис, література та підготовка до ЗНО/НМТ",
-  },
-  {
-    name: "Англійська мова",
-    icon: "fas fa-language",
-    description: "Граматика, розмовна мова, аудіювання та підготовка до ЗНО/НМТ",
-  },
-  {
-    name: "Історія України",
-    icon: "fas fa-landmark",
-    description: "Давня історія, середньовіччя, новітня історія та підготовка до ЗНО/НМТ",
-  },
-  {
-    name: "Біологія",
-    icon: "fas fa-dna",
-    description:
-      "Ботаніка, зоологія, анатомія, генетика та підготовка до ЗНО/НМТ",
-  },
-  {
-    name: "Інформатика",
+    name: "Інформаційні технології",
     icon: "fas fa-laptop-code",
-    description: "Програмування, алгоритми, бази даних та підготовка до ЗНО/НМТ",
+    description:
+      "Розробка програмного забезпечення, веб-сайтів, мобільних додатків та IT-консультації",
   },
   {
-    name: "Географія",
-    icon: "fas fa-globe-americas",
-    description: "Фізична та економічна географія, геологія та підготовка до ЗНО/НМТ",
+    name: "Медицина",
+    icon: "fas fa-heartbeat",
+    description:
+      "Медичні консультації, догляд за пацієнтами та медичне обладнання",
   },
   {
-    name: "Іноземні мови",
-    icon: "fas fa-globe",
-    description: "Німецька, французька, іспанська, польська та інші мови",
+    name: "Енергетика",
+    icon: "fas fa-bolt",
+    description:
+      "Енергетичні рішення, відновлювані джерела енергії та енергоефективність",
+  },
+  {
+    name: "Аграрна галузь",
+    icon: "fas fa-tractor",
+    description: "Сільськогосподарські послуги, агрономія та тваринництво",
+  },
+  {
+    name: "Фінанси та банківська справа",
+    icon: "fas fa-money-bill-wave",
+    description: "Фінансові консультації, бухгалтерія та інвестиційні поради",
+  },
+  {
+    name: "Освіта",
+    icon: "fas fa-graduation-cap",
+    description: "Навчання, тренінги та освітні програми",
+  },
+  {
+    name: "Туризм і гостинність",
+    icon: "fas fa-plane",
+    description:
+      "Туристичні послуги, організація подорожей та готельний бізнес",
+  },
+  {
+    name: "Будівництво та нерухомість",
+    icon: "fas fa-hard-hat",
+    description: "Будівельні роботи, ремонт та консультації з нерухомості",
+  },
+  {
+    name: "Транспорт",
+    icon: "fas fa-truck",
+    description: "Транспортні послуги, логістика та доставка",
+  },
+  {
+    name: "Мистецтво і культура",
+    icon: "fas fa-palette",
+    description: "Творчі послуги, дизайн та організація культурних заходів",
   },
 ];
 
@@ -723,7 +723,7 @@ if (orderForm) {
       if (data.success) {
         // Success response
         orderFormMessage.textContent =
-          "Заявку успішно відправлено! Наші репетитори зв'яжуться з вами найближчим часом.";
+          "Заявку успішно відправлено! Наші майстри зв'яжуться з вами найближчим часом.";
         orderFormMessage.className = "form-message success";
         orderForm.reset();
 
@@ -958,7 +958,7 @@ async function loadTestimonials() {
           <div class="testimonial-author">${review.name}</div>
           ${
             review.master_name
-              ? `<div class="testimonial-role">Репетитор: ${review.master_name}</div>`
+              ? `<div class="testimonial-role">Майстер: ${review.master_name}</div>`
               : ""
           }
           <div class="testimonial-date">${date}</div>
@@ -1066,6 +1066,18 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
+// Observe elements with animation classes
+function setupAnimations() {
+  const animatedElements = document.querySelectorAll(
+    ".section-title, .order-form-container, .review-form-container, .footer-section, .stats-card"
+  );
+
+  animatedElements.forEach((element) => {
+    element.classList.add("to-animate");
+    observer.observe(element);
+  });
+}
+
 // Add CSS for intersection observer animations
 const style = document.createElement("style");
 style.textContent = `
@@ -1120,7 +1132,12 @@ style.textContent = `
   88.8% {
     transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
   }
-}rimary-color);
+}
+
+.view-orders-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -1273,16 +1290,3 @@ function setupAnimations() {
     observer.observe(element);
   });
 }
-
-const Main = "tutoring";
-const Focus = "education";
-const academic = "subjects";
-const subjects = "academic subjects";
-const Terminology = "tutors";
-
-// Declare variables to resolve linting errors
-const students = "students";
-const to = "to";
-const tutors = "tutors";
-const across = "across";
-const various = "various";
