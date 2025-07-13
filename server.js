@@ -14,7 +14,9 @@ const http = require("http");
 const socketIo = require("socket.io");
 const compression = require("compression");
 const helmet = require("helmet");
-
+app.get("/googleef12226500ff3127.html", (req, res) => {
+  res.send("google-site-verification: googleef12226500ff3127.html");
+});
 // Load environment variables
 dotenv.config();
 const app = express();
@@ -509,7 +511,6 @@ const createTables = async () => {
     await executeQuery(ordersTableQuery);
     await executeQuery(addIndustryColumnQuery);
     await executeQuery(addCreatedAtToUsersQuery);
-
 
     // Fix the reviews table
     await fixReviewsTable();
