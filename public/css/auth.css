@@ -1,3 +1,211 @@
+/* Header Styles */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: #2c3e50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.light .header {
+  background: #2c3e50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 100%;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #5dade2;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo i {
+  font-size: 1.6rem;
+  color: #5dade2;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.nav-link {
+  color: #bdc3c7;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 0;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #5dade2;
+}
+
+.nav-link.active {
+  color: #5dade2;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #5dade2;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: -12px;
+}
+
+.nav-button {
+  padding: 8px 24px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 20px;
+}
+
+.nav-button:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #34495e;
+  transition: 0.4s;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px;
+  overflow: hidden;
+}
+
+html.light .slider {
+  background-color: #bdc3c7;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.slider .moon,
+.slider .sun {
+  z-index: 1;
+  font-size: 12px;
+  transition: transform 0.4s ease;
+}
+
+.slider .moon {
+  margin-right: 3px;
+  transform: translateX(20px);
+}
+
+.slider .sun {
+  margin-left: 3px;
+  transform: translateX(-20px);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+input:checked + .slider .moon {
+  transform: translateX(0);
+}
+
+input:checked + .slider .sun {
+  transform: translateX(0);
+}
+
+input:checked + .slider {
+  background-color: #3498db;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #bdc3c7;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+  color: #5dade2;
+  transform: rotate(90deg);
+}
+
 :root {
   /* Enhanced color palette */
   --background-dark: #1a2238;
@@ -31,7 +239,6 @@
   --font-family: "Montserrat", sans-serif;
   --z-index-preloader: 9999;
   --z-index-modal: 2000;
-  --z-index-header: 1000;
   --z-index-dropdown: 100;
   --z-index-tooltip: 50;
 }
@@ -51,8 +258,6 @@ html {
 
 body {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   background: var(--background-dark);
   background-image: radial-gradient(
       rgba(52, 152, 219, 0.05) 1px,
@@ -82,7 +287,6 @@ html.light body {
   padding: 0 20px;
   flex: 1;
 }
-
 
 /* Auth Container */
 .auth-container {
@@ -464,10 +668,6 @@ html.light .modal-content {
   transform: translateY(0) scale(1);
 }
 
-
-
-
-
 #modalTitle {
   font-size: 1.3rem;
   font-weight: 700;
@@ -642,6 +842,15 @@ html.light .modal-footer {
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 8px 8px;
+  }
+
+  .nav-menu {
+    gap: 10px;
+  }
+
   .container {
     max-width: 960px;
   }
@@ -652,40 +861,59 @@ html.light .modal-footer {
 }
 
 @media (max-width: 992px) {
-  .container {
-    max-width: 720px;
+  .header-container {
+    padding: 12px 20px;
   }
 
-  .auth-title {
-    font-size: 2rem;
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: #2c3e50;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 80px 40px;
+    transition: all 0.4s ease;
+    z-index: 1001;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    gap: 30px;
+    margin: 0;
   }
 
-  form {
-    padding: 25px;
+  .nav-menu.active {
+    right: 0;
   }
 
-  .auth-container {
-    padding: 10px;
-    margin: 30px auto;
+  .nav-link {
+    margin: 5px 0;
+    font-size: 1.2rem;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    z-index: 1002;
+  }
+
+  .theme-switch {
+    margin: 20px 0;
   }
 }
 
 @media (max-width: 768px) {
-  .container {
-    max-width: 540px;
-    padding: 0 15px;
-  }
-
-  .header-container {
-    padding: 15px;
-  }
-
   .logo {
     font-size: 1.3rem;
   }
 
   .logo i {
     font-size: 1.6rem;
+  }
+
+  .container {
+    max-width: 540px;
+    padding: 0 15px;
   }
 
   .auth-container {
@@ -739,8 +967,6 @@ html.light .modal-footer {
     width: 95%;
   }
 
-  
-
   #modalTitle {
     font-size: 1.2rem;
   }
@@ -761,12 +987,18 @@ html.light .modal-footer {
   }
 }
 
-@media (max-width: 576px) {
-  .container {
-    padding: 0 10px;
-  }
+@media (max-width: 480px) {
   .logo {
     font-size: 1.2rem;
+  }
+
+  .nav-menu {
+    width: 100%;
+    padding: 80px 20px;
+  }
+
+  .container {
+    padding: 0 10px;
   }
 
   .logo i {
@@ -858,6 +1090,7 @@ html.light .modal-footer {
     font-size: 0.85rem;
   }
 }
+
 /* Footer */
 .footer {
   background-color: var(--footer-bg-dark);
@@ -1132,4 +1365,28 @@ html.light .footer-bottom {
 
 .copyright:hover::after {
   width: 100%;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

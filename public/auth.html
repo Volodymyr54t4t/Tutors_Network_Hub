@@ -24,46 +24,44 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="css/pwa-banner.css" />
   </head>
   <body>
-    <div class="container">
-      <!-- Header -->
-      <header class="header">
-        <div class="header-container">
-          <a href="index.html" class="logo">
-            <i class="fas fa-tools"></i>
-            <span>Tutors Network Hub</span>
-          </a>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Tutors Network Hub</span>
+        </a>
+        <div class="nav-right">
           <div class="nav-menu" id="navMenu">
             <a href="index.html" class="nav-link active">Головна</a>
             <a href="message.html" class="nav-link" id="message"
               >Повідомлення</a
             >
-
             <a href="chat.html" class="nav-link" id="chat">Чат</a>
             <a href="news.html" class="nav-link" id="news">Новини</a>
-            <a href="info.html" class="nav-link" id="info"
-              >Повідомлення(майстри)</a
-            >
             <a href="order.html" class="nav-link" id="orders">Замовлення</a>
-            <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
-            <button class="nav-button" id="loginBtn">
-              <i class="fas fa-sign-in-alt"></i>Увійти
-            </button>
-            <label class="theme-switch"
-              ><input type="checkbox" id="themeToggle" /><span class="slider">
-                <span class="moon">🌙</span><span class="sun">☀️</span></span
-              ></label
-            >
           </div>
-          <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
+          <button class="nav-button" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i>УВІЙТИ
           </button>
+          <label class="theme-switch">
+            <input type="checkbox" id="themeToggle" />
+            <span class="slider">
+              <span class="moon">🌙</span><span class="sun">☀️</span>
+            </span>
+          </label>
         </div>
-      </header>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
 
-      <main>
+    <main>
+      <div class="container">
         <div class="auth-container">
           <h1 class="auth-title">Реєстрація та Логін</h1>
 
@@ -174,11 +172,11 @@
             </div>
           </form>
         </div>
-      </main>
-
-      <div class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
       </div>
+    </main>
+
+    <div class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
     </div>
 
     <div id="modalOverlay" class="modal-overlay">
@@ -195,18 +193,19 @@
         </div>
       </div>
     </div>
+
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-section">
           <div class="footer-logo">
-            <i class="fas fa-tools"></i>
+            <i class="fas fa-graduation-cap"></i>
             Tutors Network Hub
           </div>
           <p class="footer-description">
-            Tutors Network Hub — ваш надійний партнер у світі професійних
-            послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі
-            рішення для ваших потреб у різних галузях.
+            Tutors Network Hub — ваш надійний партнер у світі освіти. Ми
+            об'єднуємо досвідчених репетиторів та учнів, щоб забезпечити
+            найкращі результати навчання з різних предметів.
           </p>
           <div class="footer-social">
             <a href="#" class="social-icon" aria-label="Facebook">
@@ -233,7 +232,7 @@
             </li>
             <li class="footer-link">
               <a href="#industries">
-                <i class="fas fa-chevron-right"></i> Галузі
+                <i class="fas fa-chevron-right"></i> Предмети
               </a>
             </li>
             <li class="footer-link">
@@ -254,11 +253,6 @@
             <li class="footer-link">
               <a href="auth.html">
                 <i class="fas fa-chevron-right"></i> Авторизація
-              </a>
-            </li>
-            <li class="footer-link">
-              <a href="./admin-login.html">
-                <i class="fas fa-chevron-right"></i> Адмін-панель
               </a>
             </li>
           </ul>
@@ -315,9 +309,8 @@
         </p>
       </div>
     </footer>
-    <script src="./js/role.js"></script>
+    <script src="js/role.js"></script>
     <script src="js/auth.js"></script>
-    <script src="auth.js"></script>
-    <script src="role.js"></script>
+    
   </body>
 </html>

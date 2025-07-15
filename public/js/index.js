@@ -1290,3 +1290,6 @@ function setupAnimations() {
     observer.observe(element);
   });
 }
+document.getElementById('modalRegisterBtn').addEventListener('click', function() {
+    window.location.href = 'auth.html#registerForm'; // ← Впиши сюди потрібну адресу
+  });
