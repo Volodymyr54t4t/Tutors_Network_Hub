@@ -42,13 +42,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-/* Hide scrollbars */
-*::-webkit-scrollbar {
-  display: none;
 }
 
 html {
@@ -56,10 +49,6 @@ html {
   height: 100%;
   font-size: 16px;
   scroll-padding-top: 80px; /* Accounts for fixed header */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  width: 100%; /* Ensure full width */
-  position: relative; /* For positioning context */
-  max-width: 100vw; /* Limit maximum width */
 }
 
 body {
@@ -79,11 +68,7 @@ body {
   transition: background var(--transition-medium),
     color var(--transition-medium);
   margin: 0;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
   line-height: 1.6;
-  width: 100%; /* Ensure full width */
-  position: relative; /* For positioning context */
-  max-width: 100vw; /* Limit maximum width */
 }
 
 html.light body {
@@ -102,10 +87,6 @@ html.light body {
 
 /* Main content wrapper */
 .main-content {
-  width: 100%;
-  overflow: hidden; /* Prevent scrolling */
-  position: relative;
-  max-width: 100vw; /* Limit maximum width */
 }
 
 /* Hero Section */
@@ -516,8 +497,12 @@ html.light .stats-subtext {
 
 .industries-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 220px), 1fr)
+  ); /* Adjusted for 5 per row, responsive */
   gap: 1.875rem;
+  padding: 0 1.25rem; /* Add padding to ensure spacing from edges */
 }
 
 .industry-card {
@@ -637,12 +622,17 @@ html.light .industry-description {
   background: var(--gradient-dark);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-dark);
-  border: 1px solid var(--border-dark);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-bottom: 1.875rem;
+  border: 1px solid var(--border-dark);
+  animation: fadeInScale 0.6s ease-out forwards;
+  position: relative; /* Added for pseudo-elements */
+  overflow: hidden; /* Ensure pseudo-elements don't overflow */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth transition */
+  z-index: 1; /* Ensure content is above pseudo-elements */
 }
 
 html.light .testimonial-card {
@@ -651,59 +641,123 @@ html.light .testimonial-card {
   border: 1px solid var(--border-light);
 }
 
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.6s ease-out;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: -1;
+}
+
+.testimonial-card:hover::before {
+  opacity: 1;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+html.light .testimonial-card:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
 .testimonial-avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1.25rem;
-  border: 3px solid var(--primary-color);
+  border: 4px solid var(--primary-color); /* Thicker border */
+  box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2); /* Subtle outer glow */
+  transition: all 0.3s ease;
+  z-index: 1; /* Ensure avatar is above pseudo-element */
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.3);
 }
 
 .testimonial-quote {
-  font-size: 1.1rem;
+  font-size: 1.15rem; /* Slightly larger font */
   line-height: 1.8;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem; /* More space below quote */
   color: var(--text-dark);
   position: relative;
-  padding: 0 1.875rem;
+  padding: 1.5rem;
+  font-style: italic; /* Italicize quote */
+  background: rgba(59, 130, 246, 0.05); /* Subtle background for quote */
+  border-radius: var(--border-radius-md);
+  border-left: 4px solid var(--primary-color); /* Accent border */
+  transition: all 0.3s ease;
+  z-index: 1;
+  text-align: left; /* Align quote text to left */
+  width: 100%; /* Ensure it takes full width */
 }
 
 html.light .testimonial-quote {
   color: var(--text-light);
+  background: rgba(59, 130, 246, 0.02);
+}
+
+.testimonial-card:hover .testimonial-quote {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial-quote::before,
 .testimonial-quote::after {
-  content: '"';
-  font-size: 3rem;
+  content: "“"; /* Use proper curly quotes */
+  font-size: 3.5rem; /* Larger quote marks */
   color: var(--primary-color);
-  opacity: 0.3;
+  opacity: 0.2; /* More subtle */
   position: absolute;
-}
-
-.testimonial-quote::before {
-  top: -20px;
-  left: 0;
+  font-style: normal; /* Ensure quote marks are not italic */
+  line-height: 1;
 }
 
 .testimonial-quote::after {
-  bottom: -40px;
-  right: 0;
+  content: "”";
+  top: auto;
+  bottom: -10px; /* Adjusted position */
+  right: 10px; /* Adjusted position */
+  left: auto;
+}
+
+.testimonial-quote::before {
+  top: 10px; /* Adjusted position */
+  left: 10px; /* Adjusted position */
 }
 
 .testimonial-author {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.3rem; /* Slightly larger */
   color: var(--primary-color);
-  margin-top: 0.625rem;
+  margin-top: 1rem; /* More space above author */
+  z-index: 1;
 }
 
 .testimonial-role {
-  font-size: 0.9rem;
+  font-size: 0.95rem; /* Slightly larger */
   color: var(--text-dark);
   opacity: 0.8;
   margin-top: 0.3125rem;
+  z-index: 1;
 }
 
 html.light .testimonial-role {
@@ -712,26 +766,30 @@ html.light .testimonial-role {
 
 .testimonial-rating {
   color: var(--warning-color);
-  font-size: 1.5rem;
-  margin-bottom: 0.9375rem;
+  font-size: 1.8rem; /* Larger stars */
+  margin-bottom: 1rem; /* More space below stars */
+  z-index: 1;
 }
 
 .testimonial-industry {
-  font-size: 0.9rem;
+  font-size: 0.95rem; /* Slightly larger */
   color: var(--primary-color);
-  margin-bottom: 0.9375rem;
+  margin-bottom: 1rem;
   font-weight: 600;
-  padding: 0.3125rem 0.9375rem;
+  padding: 0.4rem 1rem; /* Larger padding */
   background-color: rgba(59, 130, 246, 0.1);
-  border-radius: 20px;
+  border-radius: 25px; /* More rounded */
   display: inline-block;
+  border: 1px solid rgba(59, 130, 246, 0.2); /* Subtle border */
+  z-index: 1;
 }
 
 .testimonial-date {
-  font-size: 0.8rem;
+  font-size: 0.85rem; /* Slightly larger */
   color: var(--text-dark);
   opacity: 0.7;
-  margin-top: 0.9375rem;
+  margin-top: 1rem;
+  z-index: 1;
 }
 
 html.light .testimonial-date {
@@ -1477,8 +1535,12 @@ html.light .comm-text {
 
 .partners-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 220px), 1fr)
+  ); /* Adjusted for 5 per row, responsive */
   gap: 1.875rem;
+  padding: 0 1.25rem; /* Add padding to ensure spacing from edges */
 }
 
 .partner-card {
@@ -1495,18 +1557,25 @@ html.light .comm-text {
   display: flex;
   flex-direction: column;
   height: 100%;
+  animation: fadeInScale 0.6s ease-out forwards;
 }
 
 .partner-card::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
   opacity: 0;
-  transition: opacity var(--transition-medium);
+  transition: all 0.6s ease-out;
+  transform: translate(-50%, -50%) scale(0);
   z-index: -1;
 }
 
@@ -1517,12 +1586,15 @@ html.light .partner-card {
 }
 
 .partner-card:hover {
-  transform: translateY(-15px);
+  transform: translateY(-15px) scale(1.02);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .partner-card:hover::before {
   opacity: 1;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 html.light .partner-card:hover {
@@ -2336,6 +2408,11 @@ html.light .modal-close {
 
   .modal-message {
     font-size: 1.1rem;
+  }
+
+  .modal-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
   }
 
   .container {

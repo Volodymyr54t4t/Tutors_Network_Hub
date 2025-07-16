@@ -179,7 +179,6 @@ function setupMessageFilters() {
 function setupModal() {
   const modal = document.getElementById("messageModal");
   const closeModal = document.getElementById("closeModal");
-  const replyBtn = document.getElementById("replyBtn");
   const deleteBtn = document.getElementById("deleteBtn");
 
   // Закриття модального вікна
@@ -194,14 +193,7 @@ function setupModal() {
     }
   });
 
-  // Обробник кнопки відповіді
-  replyBtn.addEventListener("click", () => {
-    const messageId = modal.dataset.messageId;
-    const email = modal.dataset.email;
-
-    // Перенаправлення на сторінку повідомлення з заповненим email
-    window.location.href = `message.html?reply=${email}`;
-  });
+  
 
   // Обробник кнопки видалення
   deleteBtn.addEventListener("click", async () => {

@@ -83,7 +83,6 @@ html.light body {
   flex: 1;
 }
 
-
 /* Messages Container */
 .messages-container {
   background: var(--gradient-dark);
@@ -184,6 +183,20 @@ html.light .filter-select {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+}
+
+.filter-select option {
+  background-color: var(
+    --card-bg-dark
+  ); /* Dark background for options in dark mode */
+  color: var(--text-dark); /* Light text for options in dark mode */
+}
+
+html.light .filter-select option {
+  background-color: var(
+    --card-bg-light
+  ); /* Light background for options in light mode */
+  color: var(--text-light); /* Dark text for options in light mode */
 }
 
 .search-group {

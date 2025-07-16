@@ -81,7 +81,6 @@ html.light body {
   flex: 1 0 auto; /* Allow container to grow but not shrink */
 }
 
-
 /* Responsive Styles for Header with better adaptability */
 @media (max-width: 1400px) {
   .nav-link {
@@ -406,23 +405,6 @@ h1::after {
   display: flex;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 20px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) transparent;
-}
-
-.tabs::-webkit-scrollbar {
-  height: 4px;
-}
-
-.tabs::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.tabs::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
-  border-radius: 20px;
 }
 
 html.light .tabs {
@@ -2517,7 +2499,7 @@ html.light .mobile-menu-btn {
     font-size: 0.9rem;
     padding: 8px 8px;
   }
-  
+
   .nav-menu {
     gap: 10px;
   }
@@ -2573,7 +2555,7 @@ html.light .mobile-menu-btn {
   .logo {
     font-size: 1.2rem;
   }
-  
+
   .nav-menu {
     width: 100%;
     padding: 80px 20px;

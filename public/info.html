@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Повідомлення для майстрів</title>
+    <title>Повідомлення для репетиторів</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -16,42 +16,42 @@
     <link rel="stylesheet" href="css/info.css" />
   </head>
   <body>
-   <!-- Header -->
-   <header class="header">
-    <div class="header-container">
-      <a href="index.html" class="logo">
-        <i class="fas fa-tools"></i>
-        <span>Tutors Network Hub</span>
-      </a>
-      <div class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link active">Головна</a>
-        <a href="message.html" class="nav-link" id="message">Повідомлення</a>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <i class="fas fa-tools"></i>
+          <span>Tutors Network Hub</span>
+        </a>
+        <div class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link active">Головна</a>
+          <a href="message.html" class="nav-link" id="message">Повідомлення</a>
 
-        <a href="chat.html" class="nav-link" id="chat">Чат</a>
-        <a href="news.html" class="nav-link" id="news">Новини</a>
-        <a href="info.html" class="nav-link" id="info"
-          >Повідомлення(майстри)</a
-        >
-        <a href="order.html" class="nav-link" id="orders">Замовлення</a>
-        <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
-        <button class="nav-button" id="loginBtn">
-          <i class="fas fa-sign-in-alt"></i>Увійти
+          <a href="chat.html" class="nav-link" id="chat">Чат</a>
+          <a href="news.html" class="nav-link" id="news">Новини</a>
+          <a href="info.html" class="nav-link" id="info"
+            >Повідомлення(репетитори)</a
+          >
+          <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+          <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+          <button class="nav-button" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i>Увійти
+          </button>
+          <label class="theme-switch"
+            ><input type="checkbox" id="themeToggle" /><span class="slider">
+              <span class="moon">🌙</span><span class="sun">☀️</span></span
+            ></label
+          >
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
         </button>
-        <label class="theme-switch"
-          ><input type="checkbox" id="themeToggle" /><span class="slider">
-            <span class="moon">🌙</span><span class="sun">☀️</span></span
-          ></label
-        >
       </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </header>
+    </header>
 
     <div class="container">
       <div class="messages-container">
-        <h1 class="messages-title">Повідомлення для майстрів</h1>
+        <h1 class="messages-title">Повідомлення для репетиторів</h1>
 
         <div class="messages-filter">
           <div class="filter-group">
@@ -111,9 +111,6 @@
           <!-- Message details will be loaded here -->
         </div>
         <div class="modal-footer">
-          <button class="modal-btn" id="replyBtn">
-            <i class="fas fa-reply"></i> Відповісти
-          </button>
           <button class="modal-btn delete-btn" id="deleteBtn">
             <i class="fas fa-trash"></i> Видалити
           </button>
@@ -236,7 +233,6 @@
         </p>
       </div>
     </footer>
-
 
     <!-- Back to top button -->
     <button class="back-to-top" id="backToTop">
