@@ -503,61 +503,57 @@ document.getElementById("findMasterBtn").addEventListener("click", () => {
   });
 });
 
-// Industry data with icons and descriptions
+// Subject data with icons and descriptions
 const industryData = [
   {
-    name: "Інформаційні технології",
-    icon: "fas fa-laptop-code",
-    description:
-      "Розробка програмного забезпечення, веб-сайтів, мобільних додатків та IT-консультації",
+    name: "Математика",
+    icon: "fas fa-square-root-alt",
+    description: "Алгебра, геометрія, тригонометрія, підготовка до ЗНО та НМТ",
   },
   {
-    name: "Медицина",
-    icon: "fas fa-heartbeat",
-    description:
-      "Медичні консультації, догляд за пацієнтами та медичне обладнання",
+    name: "Фізика",
+    icon: "fas fa-atom",
+    description: "Основи фізики, задачі, експерименти та підготовка до іспитів",
   },
   {
-    name: "Енергетика",
-    icon: "fas fa-bolt",
-    description:
-      "Енергетичні рішення, відновлювані джерела енергії та енергоефективність",
+    name: "Хімія",
+    icon: "fas fa-vials",
+    description: "Неорганічна та органічна хімія, лабораторні роботи, ЗНО",
   },
   {
-    name: "Аграрна галузь",
-    icon: "fas fa-tractor",
-    description: "Сільськогосподарські послуги, агрономія та тваринництво",
+    name: "Українська мова та література",
+    icon: "fas fa-book",
+    description: "Граматика, правопис, аналіз творів та підготовка до ЗНО",
   },
   {
-    name: "Фінанси та банківська справа",
-    icon: "fas fa-money-bill-wave",
-    description: "Фінансові консультації, бухгалтерія та інвестиційні поради",
+    name: "Англійська мова",
+    icon: "fas fa-language",
+    description: "Лексика, граматика, розмовна мова, ЗНО та міжнародні іспити",
   },
   {
-    name: "Освіта",
-    icon: "fas fa-graduation-cap",
-    description: "Навчання, тренінги та освітні програми",
+    name: "Історія України",
+    icon: "fas fa-landmark",
+    description: "Історичні періоди, дати, події, аналіз та підготовка до ЗНО",
   },
   {
-    name: "Туризм і гостинність",
-    icon: "fas fa-plane",
-    description:
-      "Туристичні послуги, організація подорожей та готельний бізнес",
+    name: "Біологія",
+    icon: "fas fa-dna",
+    description: "Клітини, організми, екологія та підготовка до іспитів",
   },
   {
-    name: "Будівництво та нерухомість",
-    icon: "fas fa-hard-hat",
-    description: "Будівельні роботи, ремонт та консультації з нерухомості",
+    name: "Інформатика",
+    icon: "fas fa-desktop",
+    description: "Основи ІТ, програмування, офісні програми, алгоритми",
   },
   {
-    name: "Транспорт",
-    icon: "fas fa-truck",
-    description: "Транспортні послуги, логістика та доставка",
+    name: "Географія",
+    icon: "fas fa-globe-europe",
+    description: "Фізична та економічна географія, карти, ЗНО",
   },
   {
-    name: "Мистецтво і культура",
-    icon: "fas fa-palette",
-    description: "Творчі послуги, дизайн та організація культурних заходів",
+    name: "Іноземні мови",
+    icon: "fas fa-comments",
+    description: "Німецька, французька, іспанська мови — граматика та практика",
   },
 ];
 
@@ -1290,6 +1286,8 @@ function setupAnimations() {
     observer.observe(element);
   });
 }
-document.getElementById('modalRegisterBtn').addEventListener('click', function() {
-    window.location.href = 'auth.html#registerForm'; // ← Впиши сюди потрібну адресу
+document
+  .getElementById("modalRegisterBtn")
+  .addEventListener("click", function () {
+    window.location.href = "auth.html#registerForm"; // ← Впиши сюди потрібну адресу
   });

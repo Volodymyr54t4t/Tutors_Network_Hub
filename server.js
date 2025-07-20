@@ -5733,3 +5733,299 @@ app.get("/admin", (req, res) => {
 app.get("/googleef12226500ff3127.html", (req, res) => {
   res.send("google-site-verification: googleef12226500ff3127.html");
 });
+// Ендпоінт для отримання всіх репетиторів з їх предметами
+app.get("/api/tutors", async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = (page - 1) * limit;
+    const subject = req.query.subject;
+    const search = req.query.search;
+    const sortBy = req.query.sortBy || "name";
+
+    // Базовий запит для отримання репетиторів
+    let query = `
+      SELECT DISTINCT u.id, u.username, 
+             up.first_name, up.last_name, up.email, up.phone, 
+             up.address, up.date_of_birth, up.profile_image_url,
+             CONCAT(up.first_name, ' ', up.last_name) as full_name
+      FROM users u
+      JOIN user_profile up ON u.id = up.user_id
+      WHERE up.role_master = true AND up.approval_status = 'approved'
+    `;
+
+    const queryParams = [];
+    let paramIndex = 1;
+
+    // Фільтр за предметом
+    if (subject) {
+      query += ` AND EXISTS (
+        SELECT 1 FROM user_services us 
+        WHERE us.user_id = u.id 
+        AND us.service_type = 'industry' 
+        AND us.service_name = $${paramIndex}
+      )`;
+      queryParams.push(subject);
+      paramIndex++;
+    }
+
+    // Пошук за ім'ям або username
+    if (search) {
+      query += ` AND (
+        LOWER(CONCAT(up.first_name, ' ', up.last_name)) LIKE LOWER($${paramIndex}) OR
+        LOWER(u.username) LIKE LOWER($${paramIndex}) OR
+        LOWER(up.email) LIKE LOWER($${paramIndex})
+      )`;
+      queryParams.push(`%${search}%`);
+      paramIndex++;
+    }
+
+    // Сортування
+    switch (sortBy) {
+      case "name":
+        query += ` ORDER BY up.first_name, up.last_name`;
+        break;
+      case "username":
+        query += ` ORDER BY u.username`;
+        break;
+      default:
+        query += ` ORDER BY up.first_name, up.last_name`;
+    }
+
+    query += ` LIMIT $${paramIndex} OFFSET $${paramIndex + 1}`;
+    queryParams.push(limit, offset);
+
+    const result = await executeQuery(query, queryParams);
+
+    // Для кожного репетитора отримуємо його предмети
+    const tutors = [];
+    for (const tutor of result.rows) {
+      // Отримуємо предмети репетитора
+      const subjectsResult = await executeQuery(
+        `SELECT service_name 
+         FROM user_services 
+         WHERE user_id = $1 AND service_type = 'industry'
+         ORDER BY service_name`,
+        [tutor.id]
+      );
+
+      const subjects = subjectsResult.rows.map((row) => row.service_name);
+
+      // Перевіряємо, чи репетитор онлайн (можна інтегрувати з Socket.io)
+      const isOnline = false; // Тут можна додати логіку перевірки онлайн статусу
+
+      tutors.push({
+        ...tutor,
+        subjects,
+        online: isOnline,
+        full_name:
+          tutor.full_name ||
+          `${tutor.first_name || ""} ${tutor.last_name || ""}`.trim(),
+      });
+    }
+
+    // Отримуємо загальну кількість репетиторів для пагінації
+    let countQuery = `
+      SELECT COUNT(DISTINCT u.id) as total
+      FROM users u
+      JOIN user_profile up ON u.id = up.user_id
+      WHERE up.role_master = true AND up.approval_status = 'approved'
+    `;
+
+    const countParams = [];
+    let countParamIndex = 1;
+
+    if (subject) {
+      countQuery += ` AND EXISTS (
+        SELECT 1 FROM user_services us 
+        WHERE us.user_id = u.id 
+        AND us.service_type = 'industry' 
+        AND us.service_name = $${countParamIndex}
+      )`;
+      countParams.push(subject);
+      countParamIndex++;
+    }
+
+    if (search) {
+      countQuery += ` AND (
+        LOWER(CONCAT(up.first_name, ' ', up.last_name)) LIKE LOWER($${countParamIndex}) OR
+        LOWER(u.username) LIKE LOWER($${countParamIndex}) OR
+        LOWER(up.email) LIKE LOWER($${countParamIndex})
+      )`;
+      countParams.push(`%${search}%`);
+    }
+
+    const countResult = await executeQuery(countQuery, countParams);
+    const total = parseInt(countResult.rows[0].total);
+
+    res.status(200).json({
+      success: true,
+      tutors,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+        hasMore: offset + tutors.length < total,
+      },
+    });
+  } catch (err) {
+    console.error("❌ Помилка при отриманні репетиторів:", err.message);
+    res.status(500).json({
+      success: false,
+      message: "Помилка сервера",
+      error: err.message,
+    });
+  }
+});
+
+// Ендпоінт для отримання деталей конкретного репетитора
+app.get("/api/tutors/:tutorId", async (req, res) => {
+  try {
+    const tutorId = req.params.tutorId;
+
+    // Отримуємо основну інформацію про репетитора
+    const tutorResult = await executeQuery(
+      `SELECT u.id, u.username, u.created_at,
+              up.first_name, up.last_name, up.email, up.phone, 
+              up.address, up.date_of_birth, up.profile_image_url,
+              CONCAT(up.first_name, ' ', up.last_name) as full_name
+       FROM users u
+       JOIN user_profile up ON u.id = up.user_id
+       WHERE u.id = $1 AND up.role_master = true AND up.approval_status = 'approved'`,
+      [tutorId]
+    );
+
+    if (tutorResult.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Репетитора не знайдено",
+      });
+    }
+
+    const tutor = tutorResult.rows[0];
+
+    // Отримуємо предмети репетитора
+    const subjectsResult = await executeQuery(
+      `SELECT service_name 
+       FROM user_services 
+       WHERE user_id = $1 AND service_type = 'industry'
+       ORDER BY service_name`,
+      [tutorId]
+    );
+
+    const subjects = subjectsResult.rows.map((row) => row.service_name);
+
+    // Отримуємо додаткові послуги репетитора
+    const servicesResult = await executeQuery(
+      `SELECT service_name, service_type
+       FROM user_services 
+       WHERE user_id = $1 AND service_type != 'industry'
+       ORDER BY service_name`,
+      [tutorId]
+    );
+
+    const services = servicesResult.rows;
+
+    // Отримуємо відгуки про репетитора
+    const reviewsResult = await executeQuery(
+      `SELECT r.rating, r.text, r.name, r.created_at
+       FROM reviews r
+       WHERE r.master_name ILIKE $1 AND r.status = 'approved'
+       ORDER BY r.created_at DESC
+       LIMIT 10`,
+      [`%${tutor.first_name}%${tutor.last_name}%`]
+    );
+
+    const reviews = reviewsResult.rows;
+
+    // Обчислюємо середній рейтинг
+    const avgRating =
+      reviews.length > 0
+        ? reviews.reduce((sum, review) => sum + review.rating, 0) /
+          reviews.length
+        : 0;
+
+    // Перевіряємо онлайн статус (можна інтегрувати з Socket.io)
+    const isOnline = false; // Тут можна додати логіку перевірки онлайн статусу
+
+    const tutorDetails = {
+      ...tutor,
+      subjects,
+      services,
+      reviews,
+      rating: Math.round(avgRating * 10) / 10,
+      reviewsCount: reviews.length,
+      online: isOnline,
+      full_name:
+        tutor.full_name ||
+        `${tutor.first_name || ""} ${tutor.last_name || ""}`.trim(),
+    };
+
+    res.status(200).json({
+      success: true,
+      tutor: tutorDetails,
+    });
+  } catch (err) {
+    console.error("❌ Помилка при отриманні деталей репетитора:", err.message);
+    res.status(500).json({
+      success: false,
+      message: "Помилка сервера",
+      error: err.message,
+    });
+  }
+});
+
+// Ендпоінт для отримання статистики репетиторів
+app.get("/api/tutors-stats", async (req, res) => {
+  try {
+    // Загальна кількість репетиторів
+    const totalTutorsResult = await executeQuery(
+      `SELECT COUNT(*) as total
+       FROM user_profile 
+       WHERE role_master = true AND approval_status = 'approved'`
+    );
+
+    // Кількість предметів
+    const totalSubjectsResult = await executeQuery(
+      `SELECT COUNT(DISTINCT service_name) as total
+       FROM user_services 
+       WHERE service_type = 'industry'`
+    );
+
+    // Кількість онлайн репетиторів (заглушка)
+    const onlineTutors = 0; // Тут можна додати логіку підрахунку онлайн користувачів
+
+    // Статистика за предметами
+    const subjectStatsResult = await executeQuery(
+      `SELECT us.service_name, COUNT(*) as tutors_count
+       FROM user_services us
+       JOIN user_profile up ON us.user_id = up.user_id
+       WHERE us.service_type = 'industry' 
+       AND up.role_master = true 
+       AND up.approval_status = 'approved'
+       GROUP BY us.service_name
+       ORDER BY tutors_count DESC`
+    );
+
+    res.status(200).json({
+      success: true,
+      stats: {
+        totalTutors: parseInt(totalTutorsResult.rows[0].total),
+        totalSubjects: parseInt(totalSubjectsResult.rows[0].total),
+        onlineTutors: onlineTutors,
+        subjectStats: subjectStatsResult.rows,
+      },
+    });
+  } catch (err) {
+    console.error(
+      "❌ Помилка при отриманні статистики репетиторів:",
+      err.message
+    );
+    res.status(500).json({
+      success: false,
+      message: "Помилка сервера",
+      error: err.message,
+    });
+  }
+});

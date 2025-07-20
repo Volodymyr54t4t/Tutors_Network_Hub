@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Наші репетитори — Tutors Network Hub</title>
+    <meta
+      name="description"
+      content="Знайдіть кваліфікованих репетиторів у різних предметах на платформі Tutors Network Hub. Перевірені викладачі з досвідом та позитивними відгуками."
+    />
+
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#6a00ff" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/tutors.css" />
+  </head>
+  <body>
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+      <div class="login-modal">
+        <button class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </button>
+        <i class="fas fa-user-lock modal-icon"></i>
+        <h2 class="modal-title">Ви ще не увійшли до системи</h2>
+        <p class="modal-message">
+          Для доступу до всіх функцій платформи, будь ласка, увійдіть до свого
+          облікового запису або зареєструйтеся.
+        </p>
+        <div class="modal-buttons">
+          <button class="modal-btn" id="modalLoginBtn">
+            <i class="fas fa-sign-in-alt"></i>
+            Увійти
+          </button>
+          <button class="modal-btn secondary" id="modalRegisterBtn">
+            <i class="fas fa-user-plus"></i>
+            Зареєструватися
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Tutors Network Hub</span>
+        </a>
+        <div class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link">Головна</a>
+          <a href="tutors.html" class="nav-link active">Репетитори</a>
+          <a href="message.html" class="nav-link" id="message">Повідомлення</a>
+          <a href="chat.html" class="nav-link" id="chat">Чат</a>
+          <a href="news.html" class="nav-link" id="news">Новини</a>
+          <a href="info.html" class="nav-link" id="info"
+            >Повідомлення(репетитори)</a
+          >
+          <a href="order.html" class="nav-link" id="orders">Замовлення</a>
+          <a href="profile.html" class="nav-link" id="profileLink">Профіль</a>
+          <button class="nav-button" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i>Увійти
+          </button>
+          <label class="theme-switch">
+            <input type="checkbox" id="themeToggle" />
+            <span class="slider">
+              <span class="moon">🌙</span><span class="sun">☀️</span>
+            </span>
+          </label>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="tutors-hero">
+        <div class="container">
+          <h1 class="hero-title">Наші репетитори</h1>
+          <p class="hero-subtitle">
+            Знайдіть кваліфікованого репетитора для навчання з будь-якого
+            предмету
+          </p>
+        </div>
+      </section>
+
+      <!-- Search and Filter Section -->
+      <section class="search-filter-section">
+        <div class="container">
+          <div class="search-filter-container">
+            <div class="search-box">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Пошук репетиторів за ім'ям або предметом..."
+              />
+              <button id="searchBtn">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+
+            <div class="filter-controls">
+              <select id="subjectFilter">
+                <option value="">Всі предмети</option>
+              </select>
+
+              <select id="sortBy">
+                <option value="name">За ім'ям</option>
+                <option value="subject">За предметом</option>
+                <option value="rating">За рейтингом</option>
+                <option value="experience">За досвідом</option>
+              </select>
+
+              <button id="clearFilters" class="clear-btn">
+                <i class="fas fa-times"></i>
+                Очистити
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tutors Section -->
+      <section class="tutors-section">
+        <div class="container">
+          <div class="tutors-stats">
+            <div class="stats-item">
+              <span class="stats-number" id="totalTutors">0</span>
+              <span class="stats-label">Репетиторів</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-number" id="totalSubjects">0</span>
+              <span class="stats-label">Предметів</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-number" id="onlineTutors">0</span>
+              <span class="stats-label">Онлайн зараз</span>
+            </div>
+          </div>
+
+          <!-- Loading Spinner -->
+          <div class="loading-spinner" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Завантаження репетиторів...</p>
+          </div>
+
+          <!-- No Results Message -->
+          <div class="no-results" id="noResults" style="display: none">
+            <i class="fas fa-search"></i>
+            <h3>Репетиторів не знайдено</h3>
+            <p>Спробуйте змінити критерії пошуку або фільтри</p>
+          </div>
+
+          <!-- Tutors Grid -->
+          <div class="tutors-grid" id="tutorsGrid">
+            <!-- Tutors will be dynamically loaded here -->
+          </div>
+
+          <!-- Load More Button -->
+          <div class="load-more-container">
+            <button
+              class="load-more-btn"
+              id="loadMoreBtn"
+              style="display: none"
+            >
+              <i class="fas fa-plus"></i>
+              Завантажити ще
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Tutor Details Modal -->
+    <div class="modal-overlay" id="tutorModal">
+      <div class="tutor-modal">
+        <button class="modal-close" id="tutorModalClose">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="tutor-modal-content" id="tutorModalContent">
+          <!-- Tutor details will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Communication Panel -->
+    <div class="communication-panel">
+      <button class="comm-btn" id="commToggleBtn">
+        <i class="fas fa-comments"></i>
+      </button>
+      <div class="comm-menu" id="commMenu">
+        <div class="comm-item" id="messageBtn">
+          <div class="comm-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <span class="comm-text">Повідомлення</span>
+        </div>
+        <div class="comm-item" id="chatBtn">
+          <div class="comm-icon">
+            <i class="fas fa-comment-dots"></i>
+          </div>
+          <span class="comm-text">Чат</span>
+        </div>
+        <div class="comm-item" id="voiceBtn">
+          <div class="comm-icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <span class="comm-text">Голосовий</span>
+        </div>
+        <div class="comm-item" id="videoBtn">
+          <div class="comm-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <span class="comm-text">Відео</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-graduation-cap"></i>
+            Tutors Network Hub
+          </div>
+          <p class="footer-description">
+            Tutors Network Hub — ваш надійний партнер у світі освіти. Ми
+            об'єднуємо досвідчених репетиторів та учнів, щоб забезпечити
+            найкращі результати навчання з різних предметів.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Швидкі посилання</h3>
+          <ul class="footer-links">
+            <li class="footer-link">
+              <a href="index.html">
+                <i class="fas fa-chevron-right"></i> Головна
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="tutors.html">
+                <i class="fas fa-chevron-right"></i> Репетитори
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="faq.html">
+                <i class="fas fa-chevron-right"></i> Часті запитання
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="terms-of-use.html">
+                <i class="fas fa-chevron-right"></i> Умови використання
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="privacy-policy.html">
+                <i class="fas fa-chevron-right"></i> Політика конфіденційності
+              </a>
+            </li>
+            <li class="footer-link">
+              <a href="./about.html">
+                <i class="fas fa-chevron-right"></i> Про нас
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Контакти</h3>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Адреса</div>
+              <div class="contact-value">м. Житомир, вул. Чуднівська, 103</div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">
+                <a href="tel:+380965383239">+380 96 538 3239</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:24g_chvv@liceum.ztu.edu.ua"
+                  >24g_chvv@liceum.ztu.edu.ua</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="footer-contact">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">Графік роботи</div>
+              <div class="contact-value">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2025 Tutors Network Hub. Всі права захищені.
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/role.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/tutors.js"></script>
+  </body>
+</html>
