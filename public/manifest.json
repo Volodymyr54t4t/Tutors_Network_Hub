@@ -1,7 +1,7 @@
 {
-  "name": "ProFix Network Hub",
-  "short_name": "ProFix_Network_Hub",
-  "description": "Ваш надійний партнер у світі професійних послуг. Ми об'єднуємо досвід і інновації, щоб забезпечити найкращі рішення для ваших потреб у різних галузях.",
+  "name": "Tutors Network Hub",
+  "short_name": "Tutors_Network_Hub",
+  "description": "Tutors Network Hub — платформа репетиторів з ІТ, медицини, енергетики,фінансів, туризму, мистецтва та освіти",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
